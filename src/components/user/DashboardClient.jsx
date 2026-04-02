@@ -97,6 +97,14 @@ function NavBar({ user, unreadCount, onLogout }) {
                   className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
                   <i className="bi bi-briefcase text-[14px] text-[#AAA]" />Marketplace
                 </Link>
+                <Link href="/leaderboard" onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
+                  <i className="bi bi-trophy text-[14px] text-[#AAA]" />Leaderboard
+                </Link>
+                <Link href="/kyc" onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
+                  <i className="bi bi-shield-check text-[14px] text-[#AAA]" />KYC Verification
+                </Link>
                 <Link href="/premium" onClick={() => setMenuOpen(false)}
                   className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
                   <i className="bi bi-patch-check-fill text-[14px] text-[#F59E0B]" />Get Premium
@@ -342,7 +350,7 @@ export default function DashboardClient() {
                   )}
                 </div>
               ) : (
-                <div className="space-y-2">
+                <div className="space-y-4">
                   {displayedPods.map(pod => <PodCard key={pod.id} pod={pod} />)}
                 </div>
               )}

@@ -8,7 +8,7 @@
 import {
   MOCK_USER, MOCK_PODS, MOCK_DEALS, MOCK_NOTIFICATIONS,
   MOCK_LEADERBOARD, MOCK_POP_RECORDS,
-  MOCK_PROJECT, MOCK_PROJECT_JOBS,
+  MOCK_PROJECT, MOCK_PROJECT_JOBS, MOCK_PREMIUM_CONFIG,
 } from '@/lib/mockData'
 
 const MOCK_MODE = true   // ← set false to use real backend
@@ -557,3 +557,40 @@ export async function fetchPodChat(podId) { return fetchSplitChat(podId) }
 export async function sendPodMessage(podId, body) { return sendSplitMessage(podId, body) }
 export async function exportPodPoPCV(podId) { return exportPoPCV(podId) }
 export async function fetchActiveJobs2() { return ok({ jobs: [] }) }
+
+// ─────────────────────────────────────────────────────────────
+// ADMIN — PREMIUM CONFIG (editable)
+// ─────────────────────────────────────────────────────────────
+
+// Persistent premium config in memory (for demo) — replace with DB when using real backend
+let _premiumConfig = { ...MOCK_PREMIUM_CONFIG }
+
+export async function fetchPremiumConfig() {
+  if (!MOCK_MODE) return request('GET', '/admin/premium/config')
+  await delay(200)
+  return ok({ tiers: Object.values(_premiumConfig) })
+}
+
+export async function updatePremiumTier(tierKey, updates) {
+  if (!MOCK_MODE) return request('PUT', `/admin/premium/tiers/${tierKey}`, updates)
+  await delay(300)
+  if (!_premiumConfig[tierKey]) return err(`Tier '${tierKey}' not found`)
+  _premiumConfig[tierKey] = { ..._premiumConfig[tierKey], ...updates }
+  return ok({ tier: _premiumConfig[tierKey] })
+}
+
+export async function updatePremiumPrice(tierKey, priceUSDC) {
+  if (!MOCK_MODE) return request('PATCH', `/admin/premium/tiers/${tierKey}/price`, { price: priceUSDC })
+  await delay(250)
+  if (!_premiumConfig[tierKey]) return err(`Tier '${tierKey}' not found`)
+  _premiumConfig[tierKey].price = priceUSDC
+  return ok({ tier: _premiumConfig[tierKey] })
+}
+
+export async function updatePremiumPerks(tierKey, perks) {
+  if (!MOCK_MODE) return request('PATCH', `/admin/premium/tiers/${tierKey}/perks`, { perks })
+  await delay(250)
+  if (!_premiumConfig[tierKey]) return err(`Tier '${tierKey}' not found`)
+  _premiumConfig[tierKey].perks = perks
+  return ok({ tier: _premiumConfig[tierKey] })
+}

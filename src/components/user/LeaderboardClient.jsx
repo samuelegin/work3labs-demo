@@ -62,8 +62,8 @@ export default function LeaderboardClient() {
         </div>
 
         {/* Table */}
-        <div className="bg-white border border-black/[0.07] rounded-[14px] overflow-hidden" style={{ animation: 'up 0.5s 0.08s both' }}>
-          <div className="px-5 py-3 border-b border-black/[0.06] grid grid-cols-[40px_1fr_80px_80px_80px] gap-3 items-center">
+        <div className="bg-white border border-black/[0.07] rounded-[14px] overflow-x-auto" style={{ animation: 'up 0.5s 0.08s both' }}>
+          <div className="px-5 py-3 border-b border-black/[0.06] grid grid-cols-[40px_1fr_80px_hidden_hidden] sm:grid-cols-[40px_1fr_100px_100px_80px] gap-3 items-center min-w-max sm:min-w-full">
             {['#', 'Contributor', 'Earnings', 'Reputation', 'PoPs'].map(h => (
               <span key={h} className="font-mono text-[9px] tracking-[0.1em] uppercase text-[#CCC]">{h}</span>
             ))}
@@ -80,7 +80,7 @@ export default function LeaderboardClient() {
             <div className="divide-y divide-black/[0.05]">
               {entries.map((e, i) => (
                 <Link key={e.userId} href={`/u/${e.username}`}>
-                  <div className="px-5 py-4 grid grid-cols-[40px_1fr_80px_80px_80px] gap-3 items-center hover:bg-[#FAFAFA] transition-colors">
+                  <div className="px-5 py-4 grid grid-cols-[40px_1fr_80px_hidden_hidden] sm:grid-cols-[40px_1fr_100px_100px_80px] gap-3 items-center hover:bg-[#FAFAFA] transition-colors min-w-max sm:min-w-full">
                     <div className={`w-7 h-7 rounded-full flex items-center justify-center font-mono text-[11px] font-bold ${
                       i === 0 ? 'bg-[#F59E0B] text-white'
                       : i === 1 ? 'bg-[#9CA3AF] text-white'
@@ -106,9 +106,9 @@ export default function LeaderboardClient() {
                         <p className="font-mono text-[10px] text-[#AAA]">@{e.username}</p>
                       </div>
                     </div>
-                    <span className="font-mono text-[12px] font-medium text-green-dark">${e.earningsUsd?.toLocaleString() ?? 0}</span>
-                    <span className="font-mono text-[12px] text-ink">{e.reputationScore ?? '—'}</span>
-                    <span className="font-mono text-[12px] text-[#3B82F6]">{e.popCount ?? 0}</span>
+                    <span className="font-mono text-[12px] font-medium text-green-dark whitespace-nowrap">${e.earningsUsd?.toLocaleString() ?? 0}</span>
+                    <span className="hidden sm:inline font-mono text-[12px] text-ink">{e.reputationScore ?? '—'}</span>
+                    <span className="hidden sm:inline font-mono text-[12px] text-[#3B82F6]">{e.popCount ?? 0}</span>
                   </div>
                 </Link>
               ))}

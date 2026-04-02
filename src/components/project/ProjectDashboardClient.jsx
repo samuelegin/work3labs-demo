@@ -140,6 +140,10 @@ export default function ProjectDashboardClient() {
                     className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
                     <i className="bi bi-plus-circle text-[14px] text-[#AAA]" />Post a deal
                   </Link>
+                  <Link href="/project/kyc" onClick={() => setMenuOpen(false)}
+                    className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
+                    <i className="bi bi-shield-check text-[14px] text-[#AAA]" />KYC Verification
+                  </Link>
                   <Link href="/project/premium" onClick={() => setMenuOpen(false)}
                     className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
                     <i className="bi bi-patch-check-fill text-[14px] text-[#F59E0B]" />Get Premium

@@ -312,6 +312,7 @@ export const MOCK_POP_RECORDS = [
 // Project owner side
 export const MOCK_PROJECT = {
   id: 'proj_001',
+  username: 'apexium',
   displayName: 'Apexium',
   email: 'team@apexium.io',
   bio: 'Leading Web3 job agency connecting top talent with innovative blockchain projects. Building the future of decentralized work.',
@@ -368,3 +369,44 @@ export const MOCK_PROJECT_JOBS = [
     deadline: '2026-05-30T00:00:00Z',
   },
 ]
+
+export const MOCK_PREMIUM_CONFIG = {
+  blue: {
+    key: 'blue',
+    name: 'Blue',
+    tagline: 'Verified contributor',
+    color: '#3B82F6',
+    bg: '#EFF6FF',
+    border: '#BFDBFE',
+    darkBg: 'rgba(59,130,246,0.12)',
+    imgSrc: '/images/deals-icon.png',
+    price: 9,
+    perks: [
+      'Blue badge on your public profile',
+      'Priority visibility in pod matching',
+      'Verified status on the leaderboard',
+      'Early access to premium deals',
+      'Standard support',
+    ],
+  },
+  gold: {
+    key: 'gold',
+    name: 'Gold',
+    tagline: 'Elite contributor',
+    color: '#F59E0B',
+    bg: '#FFFBEB',
+    border: '#FDE68A',
+    darkBg: 'rgba(245,158,11,0.12)',
+    imgSrc: '/images/wallet-earnings.png',
+    price: 29,
+    badge: 'Most value',
+    perks: [
+      'Gold badge — highest trust signal',
+      'Top placement in all deal searches',
+      'KYC fast-track for high-value deals',
+      'Dedicated account manager',
+      'Revenue share on referrals',
+      'Exclusive Gold-only deal access',
+    ],
+  },
+}
