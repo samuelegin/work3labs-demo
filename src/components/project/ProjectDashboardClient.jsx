@@ -3,6 +3,7 @@ import ThemeToggle from '@/components/ThemeToggle'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { fetchProjectDashboard, fetchProjectJobs, fetchProfile } from '@/services/api'
+import { MOCK_PROJECT } from '@/lib/mockData'
 
 function Skeleton({ className }) {
   return <div className={`bg-black/[0.05] rounded-[8px] animate-pulse ${className}`} />
@@ -91,7 +92,7 @@ export default function ProjectDashboardClient() {
     spent:     jobs.filter(j => j.status === 'completed').reduce((a, j) => a + (j.budgetUsd ?? 0), 0),
   }
 
-  const displayName = profile?.displayName ?? 'Project'
+  const displayName = MOCK_PROJECT.displayName ?? 'Project'
   const avatarUrl   = profile?.avatarUrl ?? null
 
   return (
