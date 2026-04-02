@@ -62,8 +62,8 @@ html.dark .shadow-\[0_4px_24px_rgba\(0\,0\,0\,0\.07\)\] { box-shadow: 0 4px 24px
 html.dark .shadow-\[0_4px_24px_rgba\(0\,0\,0\,0\.08\)\] { box-shadow: 0 4px 24px rgba(0,0,0,0.7) !important; }
 
 html.dark .bg-\[\#F4FAF7\] { background-color: rgba(29,196,51,0.08) !important; }
-html.dark .bg-\[#F9FFF9\]  { background-color: rgba(29,196,51,0.05) !important; }
-html.dark .bg-\[#F0FDF4\]  { background-color: rgba(29,196,51,0.08) !important; }
+html.dark .bg-\[\#F9FFF9\]  { background-color: rgba(29,196,51,0.18) !important; }
+html.dark .bg-\[\#F0FDF4\]  { background-color: rgba(29,196,51,0.22) !important; }
 html.dark .bg-amber-50     { background-color: rgba(245,158,11,0.08) !important; }
 html.dark .border-amber-200 { border-color: rgba(245,158,11,0.2) !important; }
 html.dark .text-amber-800  { color: #F59E0B !important; }

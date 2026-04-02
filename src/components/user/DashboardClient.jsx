@@ -209,8 +209,8 @@ function NotificationRow({ notif }) {
   const iconCls = icons[notif.type] ?? 'bi-bell text-[#AAA]'
 
   return (
-    <div className={`flex items-start gap-3 px-4 py-3.5 border-b border-black/[0.05] last:border-b-0 ${!notif.read ? 'bg-[#F9FFF9]' : 'hover:bg-[#FAFAFA]'} transition-colors`}>
-      <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${!notif.read ? 'bg-green-dark/10' : 'bg-[#F4F4F2]'}`}>
+    <div className={`flex items-start gap-3 px-4 py-3.5 border-b border-black/[0.05] last:border-b-0 ${!notif.read ? 'bg-[#DFF8EB] cursor-pointer hover:bg-[#CFF2DE]' : 'hover:bg-[#FAFAFA]'} transition-colors`}>
+      <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${!notif.read ? 'bg-green-dark/15' : 'bg-[#F4F4F2]'}`}>
         <i className={`bi ${iconCls} text-[12px]`} />
       </div>
       <div className="flex-1 min-w-0">
