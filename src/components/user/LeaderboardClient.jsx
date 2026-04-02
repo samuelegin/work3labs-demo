@@ -23,7 +23,7 @@ export default function LeaderboardClient() {
   useEffect(() => {
     setLoading(true)
     fetchLeaderboard({ period })
-      .then(({ data }) => { if (data) setEntries(data.entries ?? data.leaders ?? []) })
+      .then(({ data }) => { if (data) setEntries(data.entries ?? []) })
       .finally(() => setLoading(false))
   }, [period])
 
@@ -42,7 +42,7 @@ export default function LeaderboardClient() {
 
       <div className="max-w-[760px] mx-auto px-5 sm:px-8 py-10 sm:py-14">
         <div className="mb-8 relative overflow-hidden bg-white border border-black/[0.07] rounded-[18px] px-6 py-6">
-          <img src="/images/success-hero.png" alt="" className="absolute right-0 top-0 h-full w-auto object-contain opacity-[0.12] pointer-events-none mix-blend-multiply" />
+          <img src="/images/success-hero.png" alt="" className="absolute right-0 top-0 h-full w-auto object-contain opacity-[0.12] pointer-events-none" />
           <div className="relative" style={{ animation: 'up 0.5s cubic-bezier(0.22,1,0.36,1) both' }}>
           <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-[#AAA] block mb-3">Rankings</span>
           <h1 className="font-serif text-[28px] sm:text-[34px] font-light tracking-[-0.04em] text-ink mb-2">Leaderboard</h1>
@@ -117,5 +117,6 @@ export default function LeaderboardClient() {
         </div>
       </div>
     </div>
+  </div>
   )
 }
