@@ -85,6 +85,10 @@ function NavBar({ user, unreadCount, onLogout }) {
                     <i className="bi bi-person-circle text-[14px] text-[#AAA]" />Public profile
                   </Link>
                 )}
+                <Link href="/pod" onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
+                  <i className="bi bi-people text-[14px] text-[#AAA]" />Your pods
+                </Link>
                 <Link href="/profile" onClick={() => setMenuOpen(false)}
                   className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
                   <i className="bi bi-sliders text-[14px] text-[#AAA]" />Edit profile
@@ -256,6 +260,7 @@ export default function DashboardClient() {
   const activePods   = pods.filter(p => ['active','submitted','reviewing','approved','claimable'].includes(p.status))
   const completedPods= pods.filter(p => p.status === 'completed')
   const displayedPods= podFilter === 'active' ? activePods : podFilter === 'completed' ? completedPods : pods
+  const visiblePods  = displayedPods.slice(0, 3)
   const recentNotifs = notifications.slice(0, 4)
 
   return (
@@ -351,7 +356,14 @@ export default function DashboardClient() {
                 </div>
               ) : (
                 <div className="space-y-4">
-                  {displayedPods.map(pod => <PodCard key={pod.id} pod={pod} />)}
+                  {visiblePods.map(pod => <PodCard key={pod.id} pod={pod} />)}
+                  {displayedPods.length > visiblePods.length && (
+                    <div className="pt-2 text-right">
+                      <Link href="/pod" className="font-mono text-[10px] text-ink hover:text-green-dark transition-colors">
+                        View all pods ({displayedPods.length}) →
+                      </Link>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
