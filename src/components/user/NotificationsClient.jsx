@@ -52,7 +52,7 @@ export default function NotificationsClient() {
   return (
     <div className="min-h-screen bg-paper" style={{ fontFamily: 'Outfit, sans-serif' }}>
       <div className="sticky top-0 z-20 bg-paper/90 backdrop-blur-sm border-b border-black/[0.06]">
-        <div className="max-w-[680px] mx-auto px-5 sm:px-8 h-[58px] flex items-center justify-between">
+        <div className="max-w-[680px] mx-auto px-5 sm:px-8 py-3 sm:h-[58px] sm:py-0 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
           <div className="flex items-center gap-3">
             <Link href="/dashboard" className="flex items-center gap-2 font-mono text-[10px] tracking-[0.1em] uppercase text-[#BBB] hover:text-ink transition-colors">
               <i className="bi bi-arrow-left text-[11px]" />Dashboard
@@ -63,10 +63,10 @@ export default function NotificationsClient() {
               <span className="font-mono text-[9px] bg-green-dark text-ink font-bold rounded-full px-2 py-0.5">{unread} new</span>
             )}
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between sm:justify-end gap-2">
             {unread > 0 && (
               <button onClick={handleMarkAll} disabled={markingAll}
-                className="font-mono text-[9px] tracking-[0.08em] uppercase text-[#AAA] hover:text-ink transition-colors bg-transparent border-none cursor-pointer disabled:opacity-50">
+                className="font-mono text-[9px] tracking-[0.08em] uppercase text-[#AAA] hover:text-ink transition-colors bg-transparent border-none cursor-pointer disabled:opacity-50 whitespace-nowrap">
                 Mark all read
               </button>
             )}

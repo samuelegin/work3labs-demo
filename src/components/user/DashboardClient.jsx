@@ -258,7 +258,7 @@ export default function DashboardClient() {
       <div className="bg-green-dark text-ink px-4 py-2 flex items-center justify-center gap-3 flex-wrap">
         <i className="bi bi-lightning-charge-fill text-[12px]" />
         <span className="font-sans text-[12px] font-medium">Demo mode — all data is local and editable. No backend required.</span>
-        <a href="/project" className="font-mono text-[10px] underline opacity-70">Switch to project view →</a>
+        <a href="/project" className="font-mono text-[10px] underline opacity-70">View as project →</a>
       </div>
       <main className="max-w-[1100px] mx-auto px-4 sm:px-8 py-6 sm:py-8">
 

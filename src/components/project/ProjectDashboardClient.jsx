@@ -21,7 +21,7 @@ const JOB_STATUS = {
 function DealRow({ job }) {
   const s = JOB_STATUS[job.status] ?? JOB_STATUS.draft
   return (
-    <Link href={`/project/deals/${job.id}`}>
+    <Link href={`/project/jobs/${job.id}`}>
       <div className="group flex items-center gap-3 px-5 py-4 border-b border-black/[0.05] last:border-b-0 hover:bg-[#FAFAFA] transition-colors cursor-pointer">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-0.5 flex-wrap">
@@ -104,7 +104,7 @@ export default function ProjectDashboardClient() {
           {/* Logo */}
           <Link href="/project" className="flex items-center gap-2 flex-shrink-0">
             <img src="/logo.png" alt="Work3 Labs" className="h-7" />
-            <span className="font-mono text-[9px] tracking-[0.18em] uppercase text-[#CCC] hidden sm:block">Projects</span>
+            <span className="font-mono text-[9px] tracking-[0.18em] uppercase text-[#CCC] hidden sm:block">Dashboard</span>
           </Link>
 
           {/* Right side */}
@@ -159,7 +159,7 @@ export default function ProjectDashboardClient() {
       <div className="bg-green-dark text-ink px-4 py-2 flex items-center justify-center gap-3 flex-wrap">
         <i className="bi bi-lightning-charge-fill text-[12px]" />
         <span className="font-sans text-[12px] font-medium">Demo mode — all data is local and editable. No backend required.</span>
-        <a href="/dashboard" className="font-mono text-[10px] underline opacity-70">Switch to user view →</a>
+        <a href="/dashboard" className="font-mono text-[10px] underline opacity-70">View as contributor →</a>
       </div>
       <main className="max-w-[1100px] mx-auto px-4 sm:px-8 py-8 sm:py-10">
 

@@ -312,12 +312,12 @@ export const MOCK_POP_RECORDS = [
 // Project owner side
 export const MOCK_PROJECT = {
   id: 'proj_001',
-  displayName: 'BaseSwap Protocol',
-  email: 'team@baseswap.io',
-  bio: 'Leading DEX on Base. Building the future of on-chain trading.',
+  displayName: 'Apexium',
+  email: 'team@apexium.io',
+  bio: 'Leading Web3 job agency connecting top talent with innovative blockchain projects. Building the future of decentralized work.',
   avatarUrl: null,
   baseWallet: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
-  socials: { website: 'baseswap.io', twitter: 'baseswap' },
+  socials: { website: 'apexium.io', twitter: 'apexium' },
   blueTick: true,
   goldTick: false,
 }
