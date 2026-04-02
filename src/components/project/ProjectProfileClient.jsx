@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { fetchProfile, updateProfile } from '@/services/api'
 import { uploadAvatar } from '@/lib/uploadAvatar'
 import { useWallet } from '@/hooks/useWallet'
+import { MOCK_PROJECT } from '@/lib/mockData'
 
 function Skeleton({ className }) {
   return <div className={`bg-black/[0.05] rounded-[8px] animate-pulse ${className}`} />
@@ -43,17 +44,17 @@ export default function ProjectProfileClient() {
   const [error,       setError]       = useState('')
 
   useEffect(() => {
-    fetchProfile().then(({ data }) => {
-      if (data) {
-        setUser(data)
-        setDisplayName(data.displayName ?? '')
-        setEmail(data.email ?? '')
-        setBio(data.bio ?? '')
-        setWebsite(data.socials?.website ?? '')
-        setTwitter(data.socials?.twitter ?? '')
-      }
-      setLoading(false)
-    })
+    // Load project profile data from MOCK_PROJECT
+    const data = MOCK_PROJECT
+    if (data) {
+      setUser(data)
+      setDisplayName(data.displayName ?? '')
+      setEmail(data.email ?? '')
+      setBio(data.bio ?? '')
+      setWebsite(data.socials?.website ?? '')
+      setTwitter(data.socials?.twitter ?? '')
+    }
+    setLoading(false)
   }, [])
 
   function handleFileChange(e) {
