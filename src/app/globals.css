@@ -71,8 +71,7 @@ html.dark .shadow-\[0_2px_16px_rgba\(0\,0\,0\,0\.08\)\] { box-shadow: 0 2px 16px
 html.dark .shadow-\[0_4px_24px_rgba\(0\,0\,0\,0\.07\)\] { box-shadow: 0 4px 24px rgba(0,0,0,0.6) !important; }
 html.dark .shadow-\[0_4px_24px_rgba\(0\,0\,0\,0\.08\)\] { box-shadow: 0 4px 24px rgba(0,0,0,0.7) !important; }
 
-html.dark .bg-\[\#F4FAF7\] { background-color: rgba(29,196,51,0.08) !important; }
-html.dark .bg-\[\#F9FFF9\]  { background-color: rgba(29,196,51,0.18) !important; }
+html.dark .bg-\[\#F4FAF7\] { background-color: rgba(29,196,51,0.08) !important; }html.dark .text-\[#888\] { color: #888896 !important; }html.dark .bg-\[\#F9FFF9\]  { background-color: rgba(29,196,51,0.18) !important; }
 html.dark .bg-\[\#F0FDF4\]  { background-color: rgba(29,196,51,0.22) !important; }
 html.dark .bg-amber-50     { background-color: rgba(245,158,11,0.08) !important; }
 html.dark .border-amber-200 { border-color: rgba(245,158,11,0.2) !important; }
@@ -82,6 +81,10 @@ html.dark .bg-amber-100    { background-color: rgba(245,158,11,0.1) !important; 
 html.dark .bg-\[#EFF6FF\]  { background-color: rgba(59,130,246,0.1) !important; }
 html.dark .border-\[#BFDBFE\] { border-color: rgba(59,130,246,0.2) !important; }
 html.dark .text-\[#93C5FD\] { color: rgba(59,130,246,0.7) !important; }
+html.dark .text-\[#1D4ED8\] { color: #60A5FA !important; }
+html.dark .text-\[#3B82F6\] { color: #60A5FA !important; }
+html.dark .bg-\[#3B82F6\] { background-color: #3B82F6 !important; }
+html.dark .hover\:bg-\[#2563EB\]:hover { background-color: #1D4ED8 !important; }
 
 /* Dark input styles */
 html.dark input:not([type=radio]):not([type=checkbox]),
@@ -241,9 +244,8 @@ html.dark .theme-toggle { border-color: rgba(255,255,255,0.08); color: #888896; 
 html.dark .theme-toggle:hover { border-color: rgba(255,255,255,0.15); color: #F0F0F2; }
 
 /* Dark: ink button */
-html.dark .bg-ink { background-color: #F0F0F2 !important; }
-html.dark .text-paper { color: #0D0D0F !important; }
-html.dark .hover\:bg-\[\#1A1A1A\]:hover { background-color: #E0E0E2 !important; }
+html.dark .bg-\[\#111113\] { background-color: #1F2128 !important; }
+html.dark .hover\:bg-\[\#1A1A1A\]:hover { background-color: rgba(255,255,255,0.08) !important; }
 
 /* Tab/button active states in dark */
 html.dark button:not(.theme-toggle):not(:disabled) {
@@ -262,6 +264,8 @@ html.dark .text-\[#555\] { color: #AAAAAA !important; }
 html.dark button.bg-transparent {
   color: #F0F0F2 !important;
 }
+html.dark .border-black\/\[0\.09\]:not(.theme-toggle) { border-color: rgba(255,255,255,0.08) !important; }
+html.dark .hover\:border-black\/\[0\.2\]:hover { border-color: rgba(255,255,255,0.15) !important; }
 html.dark .hover\:text-ink:hover {
   color: #F0F0F2 !important;
 }
