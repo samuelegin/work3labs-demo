@@ -101,7 +101,7 @@ function TagInput({ label, tags, onChange, suggestions, maxTags = 10, placeholde
         onClick={() => ref.current?.focus()}
       >
         {tags.map(t => (
-          <span key={t} className="flex items-center gap-1 font-mono text-[10.5px] text-ink border border-black/[0.12] bg-[#F4F4F2] rounded-full px-2.5 py-[3px] flex-shrink-0">
+          <span key={t} className="flex items-center gap-1 font-mono text-[10.5px] text-ink border border-black/[0.12] bg-[#F4F4F2] rounded-full px-2.5 py-[3px] flex-shrink-0 tag-pill">
             {t}
             <button type="button" onClick={e => { e.stopPropagation(); remove(t) }}
               className="ml-0.5 text-[#AAA] hover:text-red-400 transition-colors bg-transparent border-none cursor-pointer p-0 leading-none">
@@ -413,7 +413,7 @@ export default function ProfileClient() {
           </div>
           <div className="px-7 py-6 space-y-5">
             <p className="text-[12.5px] font-light text-[#888] leading-relaxed">
-              Connect at least one wallet. Your wallet for the pod's settlement chain receives your PoP badge and payout. Gas fee (~$0.02 Base / &lt;$0.005 Solana) is deducted from your share before payout.
+              Connect at least one wallet. Your wallet for the pod's settlement chain receives your payout. Gas fee (~$0.02 Base / &lt;$0.005 Solana) is deducted from your share before payout.
             </p>
 
             {/* Base wallet */}
@@ -471,10 +471,10 @@ export default function ProfileClient() {
               <div key={id}>
                 <label htmlFor={id} className="font-mono text-[10px] tracking-[0.12em] uppercase text-[#999] block mb-1.5">{label}</label>
                 <div className="flex items-center border border-black/[0.09] rounded-[10px] overflow-hidden focus-within:border-[#1DC433] focus-within:shadow-[0_0_0_3px_rgba(45,252,68,0.08)] transition-all">
-                  <span className="px-3 font-mono text-[12px] text-[#BBB] border-r border-black/[0.09] bg-[#FAFAF8] flex items-center py-3 flex-shrink-0">{prefix}</span>
+                  <span className="px-3 font-mono text-[12px] text-[#BBB] border-r border-black/[0.09] bg-[#FAFAF8] flex items-center py-3 flex-shrink-0 social-prefix">{prefix}</span>
                   <input id={id} type="text" value={value} onChange={e => set(e.target.value)}
                     placeholder="yourhandle"
-                    className="flex-1 font-sans text-[14px] font-light text-ink bg-white px-3 py-3 outline-none placeholder-[#D0D0D0]" />
+                    className="flex-1 font-sans text-[14px] font-light text-ink bg-transparent px-3 py-3 outline-none placeholder-[#D0D0D0]" />
                 </div>
               </div>
             ))}

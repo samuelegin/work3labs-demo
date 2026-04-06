@@ -275,3 +275,100 @@ html.dark .hover\:border-black\/\[0\.2\]:hover {
 html.dark .hover\:shadow-\[0_2px_16px_rgba\(0\,0\,0\,0\.06\)\]:hover {
   box-shadow: 0 2px 16px rgba(0,0,0,0.6) !important;
 }
+
+/* ─── TAG PILLS dark mode (roles, skills, selected tags) ─── */
+html.dark .tag-pill {
+  background-color: #2A2A30 !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: #F0F0F2 !important;
+}
+html.dark .role-tag-pill {
+  background-color: #2A2A30 !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: #F0F0F2 !important;
+}
+html.dark .skill-tag-pill {
+  background-color: #1E1E24 !important;
+  border-color: rgba(255,255,255,0.07) !important;
+  color: #888896 !important;
+}
+
+/* ─── SOCIAL LINK PREFIX dark mode ──────────────────────── */
+html.dark .social-prefix {
+  background-color: #1A1A1E !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  color: #555560 !important;
+}
+
+/* ─── NOTIFICATION green-bg rows in dark mode ───────────── */
+html.dark .bg-\[\#DFF8EB\] {
+  background-color: rgba(29,196,51,0.10) !important;
+}
+html.dark .hover\:bg-\[\#CFF2DE\]\:hover {
+  background-color: rgba(29,196,51,0.16) !important;
+}
+/* Unread notification title text: black in light → keep readable in dark */
+html.dark .bg-\[\#DFF8EB\] .font-medium {
+  color: #F0F0F2 !important;
+}
+html.dark .bg-\[\#DFF8EB\] .text-ink {
+  color: #F0F0F2 !important;
+}
+
+/* ─── GREEN UNREAD DOT badge text (notification count) ───── */
+html.dark .bg-green-dark {
+  background-color: #1DC433 !important;
+}
+html.dark .bg-green-dark.text-ink {
+  color: #0D0D0F !important;
+}
+
+/* ─── Notification unread row: explicit text colour in dark ─ */
+html.dark [class*="bg-"][class*="DFF8EB"] p.font-medium,
+html.dark [class*="bg-"][class*="DFF8EB"] p {
+  color: #F0F0F2 !important;
+}
+
+/* ─── Tag pill bg-[#F4F4F2] used for suggestion chips & unselected tags ─ */
+html.dark button.bg-transparent.border-black\/\[0\.09\] {
+  color: #888896 !important;
+}
+
+/* ─── Unread notification row — dark mode ──────────────────── */
+html.dark .notif-unread {
+  background-color: rgba(29,196,51,0.08) !important;
+}
+html.dark .notif-unread:hover {
+  background-color: rgba(29,196,51,0.13) !important;
+}
+html.dark .notif-unread p,
+html.dark .notif-unread span:not(.bg-green-dark) {
+  color: #F0F0F2 !important;
+}
+
+/* ─── CHAT WIDGET dark mode ──────────────────────────────────── */
+html.dark .chat-panel,
+html.dark [style*="min(380px"] {
+  background-color: #1A1A1E !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+html.dark .chat-msg-them {
+  background-color: #2A2A30 !important;
+  color: #F0F0F2 !important;
+}
+html.dark .chat-msg-own {
+  background-color: #2A2A30 !important;
+}
+/* Chat bubble "them" bg — bg-[#F4F4F2] already handled */
+/* Chat input bg */
+html.dark textarea.bg-\[\#F4F4F2\] {
+  background-color: #222226 !important;
+  color: #F0F0F2 !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+
+/* ─── MOBILE BOTTOM NAV dark mode ───────────────────────────── */
+html.dark nav.fixed.bottom-0 {
+  background-color: #111113 !important;
+  border-color: rgba(255,255,255,0.06) !important;
+}

@@ -84,17 +84,25 @@ function MembersSection({ members, splits, isAdmin, projectAssigned, currentUser
                 </span>
               )}
 
-              {m.reputationScore != null && (
-                <div className="flex items-center gap-1 border border-black/[0.08] rounded-full px-2.5 py-1">
-                  <i className="bi bi-star-fill text-[9px] text-green-dark" />
-                  <span className="font-mono text-[10px] text-ink">{m.reputationScore}</span>
+              {m.piScore != null && (
+                <div className="flex flex-col items-end gap-0.5 min-w-[72px]">
+                  <div className="flex items-center gap-1">
+                    <i className="bi bi-graph-up-arrow text-[9px] text-green-dark" />
+                    <span className="font-mono text-[10px] text-ink">PI {m.piScore}</span>
+                  </div>
+                  <div className="w-16 bg-black/[0.06] rounded-full h-1.5 overflow-hidden">
+                    <div className="h-1.5 rounded-full" style={{
+                      width: `${m.piScore}%`,
+                      background: m.piScore >= 90 ? '#1DC433' : m.piScore >= 75 ? '#F59E0B' : '#3B82F6'
+                    }} />
+                  </div>
                 </div>
               )}
 
-              {m.popCount != null && m.popCount > 0 && (
-                <div className="flex items-center gap-1 border border-black/[0.08] rounded-full px-2.5 py-1">
-                  <i className="bi bi-patch-check-fill text-[9px] text-[#3B82F6]" />
-                  <span className="font-mono text-[10px] text-ink">{m.popCount}</span>
+              {m.xp != null && m.xp > 0 && (
+                <div className="flex items-center gap-1 border border-[#F59E0B]/20 bg-[#F59E0B]/08 rounded-full px-2.5 py-1">
+                  <i className="bi bi-lightning-charge-fill text-[9px] text-[#F59E0B]" />
+                  <span className="font-mono text-[10px] text-[#F59E0B]">{m.xp} XP</span>
                 </div>
               )}
 
@@ -134,7 +142,7 @@ function SplitDisplaySection({ splits, podStatus }) {
         <div className="flex items-start gap-2 mb-1">
           <i className="bi bi-info-circle text-[#CCC] text-[12px] flex-shrink-0 mt-0.5" />
           <p className="text-[12px] font-light text-[#AAA]">
-            Split was set when the pod was created. PoP mint fee (~$0.05 on Base) is deducted automatically before distribution.
+            Split was set when the pod was created. A small on-chain fee is deducted automatically before distribution.
           </p>
         </div>
 
@@ -259,8 +267,8 @@ function WorkCompletionSection({ podStatus, isAdmin, podId, onStatusChange }) {
     { key: 'submitted', label: 'Pod notified project — work complete' },
     { key: 'reviewing', label: 'Project reviewing delivery' },
     { key: 'approved', label: 'Project confirmed — admin releasing escrow' },
-    { key: 'claimable', label: 'Escrow released · PoP badges minting on Base' },
-    { key: 'completed', label: 'All splits claimed · PoP records finalised' },
+    { key: 'claimable', label: 'Escrow released · PI Scores being recorded' },
+    { key: 'completed', label: 'All splits claimed · PI Scores finalised' },
   ]
 
   const statusOrder = ['active', 'submitted', 'reviewing', 'approved', 'claimable', 'completed']
@@ -357,7 +365,7 @@ function ClaimSection({ podId, mySplit, walletAddress, isConnected, onClaimed })
           <i className="bi bi-check2 text-ink text-[24px]" />
         </div>
         <h3 className="font-serif text-[20px] font-light text-ink tracking-[-0.03em] mb-2">Split claimed!</h3>
-        <p className="text-[13px] font-light text-[#888]">Funds sent to your wallet. Your PoP badge is minted on Base.</p>
+        <p className="text-[13px] font-light text-[#888]">Funds sent to your wallet. Your PI Score is recorded.</p>
       </div>
     )
   }
@@ -375,7 +383,7 @@ function ClaimSection({ podId, mySplit, walletAddress, isConnected, onClaimed })
 
         <div className="flex items-start gap-2 bg-[#FAFAF8] border border-black/[0.07] rounded-[10px] px-4 py-3">
           <i className="bi bi-patch-check-fill text-green-dark text-[12px] flex-shrink-0 mt-0.5" />
-          <p className="text-[11.5px] font-light text-[#666]">PoP badge mint fee (~$0.05) is deducted automatically before your split is sent.</p>
+          <p className="text-[11.5px] font-light text-[#666]">A small on-chain fee is deducted automatically before your split is sent.</p>
         </div>
 
         {!isConnected && (
@@ -424,8 +432,8 @@ function PoPSection({ pod, currentUserId }) {
 
   return (
     <Section
-      title="Proof-of-Performance"
-      tag="Reputation"
+      title="Proof of Performance"
+      tag="PI Score"
       action={
         records.length > 0 && (
           <button
@@ -434,7 +442,7 @@ function PoPSection({ pod, currentUserId }) {
             className="flex items-center gap-1.5 font-mono text-[9px] tracking-[0.08em] uppercase text-[#AAA] border border-black/[0.09] rounded-full px-3 py-1.5 hover:border-black/20 hover:text-ink transition-all bg-transparent cursor-pointer disabled:opacity-50"
           >
             {exporting ? <Spinner light={false} size={12} /> : <i className="bi bi-box-arrow-up-right text-[10px]" />}
-            Export PoP
+            Export PI
           </button>
         )
       }
@@ -455,8 +463,8 @@ function PoPSection({ pod, currentUserId }) {
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {[
               ['Jobs completed', podPoP.jobsCompleted],
-              ['Avg score', podPoP.avgScore],
-              ['Pod score', pod.reputationScore],
+              ['Avg score', podPoP.avgPiScore],
+              ['Pod PI Score', pod.piScore],
             ].map(([k, v]) => v != null && (
               <div key={k} className="bg-[#FAFAF8] rounded-[8px] px-3 py-2.5">
                 <p className="font-mono text-[9px] text-[#CCC] tracking-[0.08em] uppercase mb-0.5">{k}</p>
@@ -471,7 +479,7 @@ function PoPSection({ pod, currentUserId }) {
       {records.length === 0 ? (
         <div className="px-6 py-8 text-center">
           <p className="text-[13px] font-light text-[#CCC]">
-            PoP badges are minted on Base when this pod completes verified work.
+            PoP badges (with PI Scores) are issued when this pod completes verified work.
           </p>
         </div>
       ) : (
@@ -492,14 +500,29 @@ function PoPSection({ pod, currentUserId }) {
                   ['Milestones', rec.milestones],
                   ['Delivery', rec.delivery],
                   ['Chain', rec.chainAnchor ?? 'Base'],
-                  ['Score', rec.score],
                 ].map(([k, v]) => v != null && (
                   <div key={k} className="bg-[#FAFAF8] rounded-[8px] px-3 py-2.5">
                     <p className="font-mono text-[9px] text-[#CCC] tracking-[0.08em] mb-0.5">{k}</p>
-                    <p className={`font-mono text-[12px] ${k === 'Score' ? 'text-green-dark font-medium' : 'text-ink'}`}>{v}</p>
+                    <p className="font-mono text-[12px] text-ink">{v}</p>
                   </div>
                 ))}
+                {rec.score != null && (
+                  <div className="bg-[#FAFAF8] rounded-[8px] px-3 py-2.5">
+                    <p className="font-mono text-[9px] text-[#CCC] tracking-[0.08em] mb-0.5">PI Score</p>
+                    <p className="font-mono text-[12px] text-green-dark font-medium">{rec.score}</p>
+                  </div>
+                )}
               </div>
+              {rec.score != null && (
+                <div className="mb-3">
+                  <div className="w-full bg-black/[0.06] rounded-full h-2 overflow-hidden">
+                    <div className="h-2 rounded-full transition-all duration-700" style={{
+                      width: `${Math.min(100, Number(String(rec.score).replace('/100','')))}%`,
+                      background: Number(String(rec.score).replace('/100','')) >= 90 ? '#1DC433' : Number(String(rec.score).replace('/100','')) >= 75 ? '#F59E0B' : '#3B82F6'
+                    }} />
+                  </div>
+                </div>
+              )}
               {rec.contractAddress && rec.tokenId && (
                 <a
                   href={`https://basescan.org/token/${rec.contractAddress}?a=${rec.tokenId}`}
@@ -515,10 +538,22 @@ function PoPSection({ pod, currentUserId }) {
         </div>
       )}
 
-      {pod.reputationScore != null && (
-        <div className="px-6 py-4 border-t border-black/[0.05] flex items-center justify-between">
-          <span className="text-[13px] font-light text-[#888]">Pod reputation score</span>
-          <span className="font-serif text-[28px] font-light text-green-dark tracking-[-0.06em] leading-none">{pod.reputationScore}</span>
+      {pod.piScore != null && (
+        <div className="px-6 py-4 border-t border-black/[0.05]">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[13px] font-light text-[#888]">Pod PI Score</span>
+            <span className="font-serif text-[28px] font-light text-green-dark tracking-[-0.06em] leading-none">{pod.piScore}</span>
+          </div>
+          <div className="w-full bg-black/[0.06] rounded-full h-2 overflow-hidden">
+            <div className="h-2 rounded-full transition-all duration-700" style={{
+              width: `${pod.piScore}%`,
+              background: pod.piScore >= 90 ? '#1DC433' : pod.piScore >= 75 ? '#F59E0B' : '#3B82F6'
+            }} />
+          </div>
+          <div className="flex justify-between mt-1">
+            <span className="font-mono text-[9px] text-[#CCC]">0</span>
+            <span className="font-mono text-[9px] text-[#CCC]">100</span>
+          </div>
         </div>
       )}
     </Section>
@@ -549,7 +584,7 @@ function DissolveSection({ podId, onDissolved }) {
       </div>
       <div className="px-6 py-5">
         <p className="text-[12.5px] font-light text-[#888] mb-4 leading-relaxed">
-          Permanently dissolves this pod. This cannot be undone. Existing PoP records are preserved. Only available before a project is assigned.
+          Permanently dissolves this pod. This cannot be undone. Existing PI Score records are preserved. Only available before a project is assigned.
         </p>
         {error && (
           <p className="text-[12px] text-red-500 font-light flex items-center gap-1.5 mb-3">
@@ -724,10 +759,16 @@ export default function PodDetailClient({ podId }) {
                   <i className="bi bi-pencil text-[10px]" />Edit
                 </Link>
               )}
-              {pod.reputationScore != null && (
-                <div className="bg-white border border-black/[0.07] rounded-[12px] px-4 py-3 text-center">
-                  <p className="font-mono text-[9px] tracking-[0.1em] uppercase text-[#CCC] mb-0.5">Reputation</p>
-                  <p className="font-serif text-[26px] font-light text-green-dark tracking-[-0.06em] leading-none">{pod.reputationScore}</p>
+              {pod.piScore != null && (
+                <div className="bg-white border border-black/[0.07] rounded-[12px] px-4 py-3">
+                  <p className="font-mono text-[9px] tracking-[0.1em] uppercase text-[#CCC] mb-1">PI Score</p>
+                  <p className="font-serif text-[26px] font-light text-green-dark tracking-[-0.06em] leading-none mb-2">{pod.piScore}</p>
+                  <div className="w-full bg-black/[0.06] rounded-full h-1.5 overflow-hidden">
+                    <div className="h-1.5 rounded-full transition-all duration-700" style={{
+                      width: `${pod.piScore}%`,
+                      background: pod.piScore >= 90 ? '#1DC433' : pod.piScore >= 75 ? '#F59E0B' : '#3B82F6'
+                    }} />
+                  </div>
                 </div>
               )}
             </div>

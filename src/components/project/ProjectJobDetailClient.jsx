@@ -178,7 +178,7 @@ export default function ProjectJobDetailClient({ jobId }) {
                       {m.type === 'pod' && <span className="font-mono text-[9px] tracking-[0.06em] uppercase text-green-dark border border-green-dark/20 bg-green-dark/5 rounded-full px-1.5 py-0.5">Pod</span>}
                     </div>
                     <div className="flex items-center gap-3 mt-0.5">
-                      {m.reputationScore != null && <span className="flex items-center gap-1 text-[11px] font-light text-[#AAA]"><i className="bi bi-star-fill text-[9px] text-[#F59E0B]" />{m.reputationScore}</span>}
+                      {m.piScore != null && <span className="flex items-center gap-1 text-[11px] font-light text-[#AAA]"><i className="bi bi-graph-up-arrow text-[9px] text-green-dark" />{m.piScore}</span>}
                       {m.successRate != null && <span className="text-[11px] font-light text-[#AAA]">{Math.round(m.successRate * 100)}% success</span>}
                       {m.matchScore != null && <span className="font-mono text-[10px] text-green-dark">{Math.round(m.matchScore * 100)}% match</span>}
                     </div>

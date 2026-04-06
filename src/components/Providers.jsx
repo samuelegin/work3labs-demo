@@ -6,6 +6,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useState } from 'react'
 import { wagmiConfig } from '@/lib/wagmi'
 import { UserAuthProvider } from '@/hooks/useUserAuth'
+import ChatWidget from '@/components/ChatWidget'
+import MobileNav from '@/components/MobileNav'
 
 import '@rainbow-me/rainbowkit/styles.css'
 
@@ -33,6 +35,8 @@ export default function Providers({ children }) {
         >
           <UserAuthProvider>
             {children}
+            <ChatWidget />
+            <MobileNav />
           </UserAuthProvider>
         </RainbowKitProvider>
       </QueryClientProvider>

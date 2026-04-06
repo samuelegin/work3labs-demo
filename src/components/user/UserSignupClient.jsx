@@ -225,7 +225,7 @@ export default function UserSignupClient() {
         <div className="w-full max-w-[420px]" style={{ animation: 'up 0.5s cubic-bezier(0.22,1,0.36,1) both' }}>
           <div className="flex flex-col items-center mb-8 sm:mb-10">
             <img src="/logo.png" alt="Work3 Labs" className="h-9 mb-4" />
-            <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-[#BBB]">Contributor Portal</span>
+            <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-[#BBB]">Talent Portal</span>
           </div>
 
           <div className="bg-white border border-black/[0.07] rounded-2xl shadow-[0_2px_40px_rgba(0,0,0,0.06)] overflow-hidden">
@@ -325,7 +325,7 @@ export default function UserSignupClient() {
           </div>
 
           <p className="text-center font-mono text-[10px] tracking-[0.08em] text-[#CCC] mt-6">
-            Work3 Labs · Contributor Portal
+            Work3 Labs · Talent Portal
           </p>
         </div>
       </div>

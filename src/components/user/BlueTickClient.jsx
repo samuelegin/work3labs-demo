@@ -7,7 +7,7 @@ const TIERS = [
   {
     key:      'blue',
     name:     'Blue',
-    tagline:  'Verified contributor',
+    tagline:  'Verified talent',
     color:    '#3B82F6',
     bg:       '#EFF6FF',
     border:   '#BFDBFE',
@@ -25,7 +25,7 @@ const TIERS = [
   {
     key:      'gold',
     name:     'Gold',
-    tagline:  'Elite contributor',
+    tagline:  'Elite talent',
     color:    '#F59E0B',
     bg:       '#FFFBEB',
     border:   '#FDE68A',

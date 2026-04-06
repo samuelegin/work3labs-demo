@@ -39,7 +39,7 @@ export default function NotFound() {
       </div>
 
       <p className="absolute bottom-6 font-mono text-[10px] tracking-[0.08em] text-[#CCC]">
-        Work3 Labs · Contributor Portal
+        Work3 Labs · Talent Portal
       </p>
     </div>
   )

@@ -132,7 +132,7 @@ export default function MarketplaceClient() {
   }, [category, chain, type, debouncedQ])
 
   return (
-    <div className="min-h-screen bg-paper" style={{ fontFamily: 'Outfit, sans-serif' }}>
+    <div className="min-h-screen bg-paper pb-24 sm:pb-8" style={{ fontFamily: 'Outfit, sans-serif' }}>
       {/* Nav */}
       <div className="sticky top-0 z-20 bg-paper/90 backdrop-blur-sm border-b border-black/[0.06]">
         <div className="max-w-[1100px] mx-auto px-5 sm:px-8 h-[58px] flex items-center justify-between gap-4">

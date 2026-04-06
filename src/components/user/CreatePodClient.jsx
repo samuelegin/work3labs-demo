@@ -220,7 +220,7 @@ export default function CreatePodClient() {
               {/* Settlement chain — chosen once at creation, determines wallet type for payout + PoP mint */}
               <div>
                 <label className="font-mono text-[10px] tracking-[0.12em] uppercase text-[#999] block mb-2">Settlement chain</label>
-                <p className="text-[11.5px] text-[#BBB] font-light mb-3">The chain where funds are released and PoP badges are minted. Members must connect the matching wallet to claim.</p>
+                <p className="text-[11.5px] text-[#BBB] font-light mb-3">The chain where funds are released and PI Scores are recorded. Members must connect the matching wallet to claim.</p>
                 <div className="grid grid-cols-2 gap-2">
                   {[
                     { key: 'base', label: 'Base', sub: '~$0.02 gas · EVM', color: '#3B82F6' },
@@ -358,7 +358,7 @@ export default function CreatePodClient() {
                 <div className="flex items-start gap-2 bg-[#F4FAF7] border border-green-dark/15 rounded-[10px] px-4 py-3">
                   <i className="bi bi-patch-check-fill text-green-dark text-[13px] flex-shrink-0 mt-0.5" />
                   <p className="text-[11.5px] font-light text-[#666] leading-relaxed">
-                    A PoP badge mint fee (~$0.05 on Base) is deducted from the split before distribution. Each member and the pod itself receive a badge per completed job.
+                    A A small on-chain fee is deducted from the split before distribution. Each member receives a PI Score per completed deal.
                   </p>
                 </div>
 

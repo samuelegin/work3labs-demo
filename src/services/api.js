@@ -6,9 +6,10 @@
 'use client'
 
 import {
-  MOCK_USER, MOCK_PODS, MOCK_DEALS, MOCK_NOTIFICATIONS,
-  MOCK_LEADERBOARD, MOCK_POP_RECORDS,
+  MOCK_USER, MOCK_PODS, MOCK_NOTIFICATIONS,
+  MOCK_LEADERBOARD, MOCK_PI_SCORE_RECORDS, MOCK_XP_TASKS,
   MOCK_PROJECT, MOCK_PROJECT_JOBS, MOCK_PREMIUM_CONFIG,
+  MOCK_DEALS,
 } from '@/lib/mockData'
 
 const MOCK_MODE = true   // ← set false to use real backend
@@ -118,8 +119,8 @@ export async function fetchPublicProfile(username) {
   return ok({
     ...MOCK_USER, ...found,
     pods: MOCK_PODS.slice(0, 2),
-    popRecords: allPopRecords,
-    totalPops: allPopRecords.length || MOCK_USER.totalPops,
+    piScoreRecords: allPopRecords,
+    totalXp: MOCK_USER.totalXp,
   })
 }
 
@@ -138,8 +139,8 @@ export async function fetchDashboardSummary() {
   await delay()
   return ok({
     totalEarningsUsd: MOCK_USER.totalEarningsUsd,
-    reputationScore:  MOCK_USER.reputationScore,
-    totalPops:        MOCK_USER.totalPops,
+    piScore: MOCK_USER.piScore,
+    totalXp: MOCK_USER.totalXp,
     activePodCount:   MOCK_PODS.filter(p => p.status === 'active').length,
   })
 }
@@ -219,10 +220,10 @@ export async function createPod(body) {
     status: 'forming',
     myRole: 'admin',
     memberCount: 1,
-    reputationScore: null,
-    popCount: 0,
+    piScore: null,
+    xp: 0,
     earningsUsd: 0,
-    members: [{ id: MOCK_USER.id, displayName: MOCK_USER.displayName, role: body.roles?.[0] ?? 'Admin', isAdmin: true, reputationScore: MOCK_USER.reputationScore, popCount: MOCK_USER.totalPops }],
+    members: [{ id: MOCK_USER.id, displayName: MOCK_USER.displayName, role: body.roles?.[0] ?? 'Admin', isAdmin: true, piScore: MOCK_USER.piScore, xp: MOCK_USER.totalXp }],
     projectAssigned: false,
     createdAt: new Date().toISOString(),
     deals: [],
@@ -479,9 +480,9 @@ export async function fetchSystemMatches(jobId) {
   if (!MOCK_MODE) return request('GET', `/project/jobs/${jobId}/matches`)
   await delay()
   return ok({ matches: [
-    { id: 'match_001', name: 'DeFi Builders', type: 'pod', reputationScore: 91, popCount: 4, matchScore: 96, members: 3, earningsUsd: 8200 },
-    { id: 'match_002', name: 'Chain Analytics', type: 'pod', reputationScore: 96, popCount: 5, matchScore: 91, members: 3, earningsUsd: 11800 },
-    { id: 'match_003', name: 'Alex Chen', type: 'individual', reputationScore: 94, popCount: 7, matchScore: 88, earningsUsd: 12450 },
+    { id: 'match_001', name: 'DeFi Builders', type: 'pod', piScore: 91, xp: 4, matchScore: 96, members: 3, earningsUsd: 8200 },
+    { id: 'match_002', name: 'Chain Analytics', type: 'pod', piScore: 96, xp: 5, matchScore: 91, members: 3, earningsUsd: 11800 },
+    { id: 'match_003', name: 'Alex Chen', type: 'individual', piScore: 94, xp: 7, matchScore: 88, earningsUsd: 12450 },
   ]})
 }
 
@@ -502,9 +503,9 @@ export async function fetchJobApplicants(jobId) {
   if (!MOCK_MODE) return request('GET', `/project/jobs/${jobId}/applicants`)
   await delay()
   return ok({ applicants: [
-    { id: 'app_001', applicantName: 'DeFi Builders', type: 'pod',        reputationScore: 91, popCount: 4, coverNote: 'We have delivered 3 similar DEX projects on Base. Portfolio: defibuilders.io', appliedAt: new Date(Date.now()-1000*60*60*6).toISOString(), status: 'accepted' },
-    { id: 'app_002', applicantName: 'Alex Chen',     type: 'individual', reputationScore: 94, popCount: 7, coverNote: 'Full-stack Web3 dev with 3 years DeFi experience. Can start immediately.',         appliedAt: new Date(Date.now()-1000*60*60*8).toISOString(), status: 'pending'  },
-    { id: 'app_003', applicantName: 'Kaito Nakamura',type: 'individual', reputationScore: 99, popCount: 12,coverNote: 'Top-rated contributor. 24 completed deals. specialising in DEX frontends.',       appliedAt: new Date(Date.now()-1000*60*60*12).toISOString(),status: 'pending'  },
+    { id: 'app_001', applicantName: 'DeFi Builders', type: 'pod',        piScore: 91, xp: 4, coverNote: 'We have delivered 3 similar DEX projects on Base. Portfolio: defibuilders.io', appliedAt: new Date(Date.now()-1000*60*60*6).toISOString(), status: 'accepted' },
+    { id: 'app_002', applicantName: 'Alex Chen',     type: 'individual', piScore: 94, xp: 7, coverNote: 'Full-stack Web3 dev with 3 years DeFi experience. Can start immediately.',         appliedAt: new Date(Date.now()-1000*60*60*8).toISOString(), status: 'pending'  },
+    { id: 'app_003', applicantName: 'Kaito Nakamura',type: 'individual', piScore: 99, xp: 12,coverNote: 'Top-rated talent. 24 completed deals. specialising in DEX frontends.',       appliedAt: new Date(Date.now()-1000*60*60*12).toISOString(),status: 'pending'  },
   ]})
 }
 

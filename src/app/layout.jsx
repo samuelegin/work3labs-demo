@@ -2,7 +2,7 @@ import './globals.css'
 import Providers from '@/components/Providers'
 
 export const metadata = {
-  title:       'Work3 Labs — Contributor Portal',
+  title:       'Work3 Labs — Talent Portal',
   description: 'Execute real work, build on-chain reputation, and earn through Talent Pods.',
 }
 

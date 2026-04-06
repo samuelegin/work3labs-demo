@@ -220,13 +220,13 @@ export default function UserLoginClient() {
         <div className="w-full max-w-[400px]" style={{ animation: 'up 0.5s cubic-bezier(0.22,1,0.36,1) both' }}>
           <div className="flex flex-col items-center mb-8 sm:mb-10">
             <img src="/logo.png" alt="Work3 Labs" className="h-9 mb-4" />
-            <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-[#BBB]">Contributor Portal</span>
+            <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-[#BBB]">Talent Portal</span>
           </div>
 
           <div className="bg-white border border-black/[0.07] rounded-2xl shadow-[0_2px_40px_rgba(0,0,0,0.06)] overflow-hidden">
             <div className="px-7 pt-7 pb-6 border-b border-black/[0.06]">
               <h1 className="font-serif text-[22px] font-light tracking-[-0.04em] text-ink mb-0.5">Sign in</h1>
-              <p className="text-[13px] font-light text-[#AAA]">Work3 Labs contributor dashboard</p>
+              <p className="text-[13px] font-light text-[#AAA]">Work3 Labs talent dashboard</p>
             </div>
 
             <div className="px-7 py-6 space-y-4">
@@ -335,7 +335,7 @@ export default function UserLoginClient() {
           </div>
 
           <p className="text-center font-mono text-[10px] tracking-[0.08em] text-[#CCC] mt-6">
-            Work3 Labs · Contributor Portal
+            Work3 Labs · Talent Portal
           </p>
         </div>
       </div>

@@ -40,14 +40,14 @@ function PodCard({ pod }) {
           <span className="flex items-center gap-1 text-[11px] font-light text-[#AAA]">
             <i className="bi bi-people text-[10px]" />{pod.memberCount ?? 0}
           </span>
-          {pod.reputationScore != null && (
+          {pod.piScore != null && (
             <span className="flex items-center gap-1 text-[11px] font-light text-[#AAA]">
-              <i className="bi bi-star text-[10px]" />{pod.reputationScore}
+              <i className="bi bi-graph-up-arrow text-[10px]" />{pod.piScore}
             </span>
           )}
-          {pod.popCount > 0 && (
+          {pod.xp > 0 && (
             <span className="flex items-center gap-1 text-[11px] font-light text-[#AAA]">
-              <i className="bi bi-patch-check text-[10px] text-[#3B82F6]" />{pod.popCount}
+              <i className="bi bi-lightning-charge-fill text-[10px] text-[#F59E0B]" />{pod.xp}
             </span>
           )}
           {pod.earningsUsd > 0 && (
@@ -80,8 +80,13 @@ export default function PodIndexPage() {
         <div className="max-w-[1100px] mx-auto px-4 sm:px-8 h-[58px] flex items-center justify-between gap-3">
           <Link href="/dashboard" className="flex items-center gap-2">
             <img src="/logo.png" alt="Work3 Labs" className="h-7" />
-            <span className="font-mono text-[9px] tracking-[0.18em] uppercase text-[#CCC]">Contributor</span>
+            <span className="font-mono text-[9px] tracking-[0.18em] uppercase text-[#CCC]">Talent</span>
           </Link>
+          <div className="flex items-center gap-2 ml-4">
+            <Link href="/dashboard" className="flex items-center gap-1.5 font-mono text-[10px] tracking-[0.1em] uppercase text-[#BBB] hover:text-ink transition-colors">
+              <i className="bi bi-arrow-left text-[11px]" />Dashboard
+            </Link>
+          </div>
           <ThemeToggle />
         </div>
       </nav>

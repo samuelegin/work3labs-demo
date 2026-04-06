@@ -41,7 +41,7 @@ function NavBar({ user, unreadCount, onLogout }) {
         {/* Logo */}
         <Link href="/dashboard" className="flex items-center gap-2 flex-shrink-0">
           <img src="/logo.png" alt="Work3 Labs" className="h-7" />
-          <span className="font-mono text-[9px] tracking-[0.18em] uppercase text-[#CCC] hidden sm:block">Contributor</span>
+          <span className="font-mono text-[9px] tracking-[0.18em] uppercase text-[#CCC] hidden sm:block">Talent</span>
         </Link>
 
         {/* Right */}
@@ -77,7 +77,7 @@ function NavBar({ user, unreadCount, onLogout }) {
             </button>
 
             {menuOpen && (
-              <div className="absolute right-0 top-full mt-1.5 w-[200px] bg-white border border-black/[0.07] rounded-[12px] shadow-[0_4px_24px_rgba(0,0,0,0.08)] overflow-hidden z-50"
+              <div className="absolute right-0 top-full mt-1.5 w-[210px] bg-white border border-black/[0.07] rounded-[12px] shadow-[0_4px_24px_rgba(0,0,0,0.08)] overflow-hidden z-50"
                 style={{ animation: 'up 0.15s both' }}>
                 {user?.username && (
                   <Link href={`/u/${user.username}`} onClick={() => setMenuOpen(false)}
@@ -93,9 +93,13 @@ function NavBar({ user, unreadCount, onLogout }) {
                   className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
                   <i className="bi bi-sliders text-[14px] text-[#AAA]" />Edit profile
                 </Link>
-                <Link href="/profile/pop" onClick={() => setMenuOpen(false)}
+                <Link href="/profile/pi" onClick={() => setMenuOpen(false)}
                   className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
-                  <i className="bi bi-patch-check text-[14px] text-[#AAA]" />Performance Book
+                  <i className="bi bi-patch-check text-[14px] text-[#AAA]" />PoP & PI Score
+                </Link>
+                <Link href="/profile/xp" onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
+                  <i className="bi bi-lightning-charge-fill text-[14px] text-[#AAA]" />XP
                 </Link>
                 <Link href="/marketplace" onClick={() => setMenuOpen(false)}
                   className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
@@ -105,13 +109,17 @@ function NavBar({ user, unreadCount, onLogout }) {
                   className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
                   <i className="bi bi-trophy text-[14px] text-[#AAA]" />Leaderboard
                 </Link>
+                <Link href="/credits" onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
+                  <i className="bi bi-coin text-[14px] text-[#AAA]" />Credits
+                </Link>
                 <Link href="/kyc" onClick={() => setMenuOpen(false)}
                   className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
                   <i className="bi bi-shield-check text-[14px] text-[#AAA]" />KYC Verification
                 </Link>
                 <Link href="/premium" onClick={() => setMenuOpen(false)}
                   className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
-                  <i className="bi bi-patch-check-fill text-[14px] text-[#F59E0B]" />Get Premium
+                  <i className="bi bi-patch-check-fill text-[14px] text-[#AAA]" />Get Premium
                 </Link>
                 <button onClick={onLogout}
                   className="w-full flex items-center gap-2.5 px-4 py-3 hover:bg-[#FFF5F5] transition-colors text-[13px] font-light text-red-500 bg-transparent border-none cursor-pointer text-left">
@@ -159,33 +167,54 @@ function StatCard({ label, value, sub, icon, accent, href, onClick, active, imgS
 /* ── Compact pod card ── */
 function PodCard({ pod }) {
   const s = STATUS[pod.status] ?? STATUS.forming
+  const createdDate = pod.createdAt ? new Date(pod.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : null
   return (
     <Link href={`/pod/${pod.id}`}>
       <div className="group bg-white border border-black/[0.07] rounded-[14px] px-4 py-4 hover:border-black/[0.14] hover:shadow-[0_2px_16px_rgba(0,0,0,0.06)] transition-all cursor-pointer">
         <div className="flex items-center justify-between gap-3 mb-2">
           <div className="flex-1 min-w-0">
             <p className="font-sans text-[13.5px] font-medium text-ink tracking-[-0.01em] truncate group-hover:text-green-dark transition-colors">{pod.name}</p>
-            <p className="font-mono text-[9px] tracking-[0.1em] uppercase mt-0.5" style={{ color: s.color }}>
-              <span className="inline-block w-1.5 h-1.5 rounded-full mr-1.5 mb-px" style={{ background: s.color }} />
-              {s.label}
-            </p>
+            <div className="flex items-center gap-2 mt-0.5 flex-wrap">
+              <p className="font-mono text-[9px] tracking-[0.1em] uppercase" style={{ color: s.color }}>
+                <span className="inline-block w-1.5 h-1.5 rounded-full mr-1.5 mb-px" style={{ background: s.color }} />
+                {s.label}
+              </p>
+              {createdDate && (
+                <span className="font-mono text-[9px] tracking-[0.06em] text-[#CCC]">
+                  <i className="bi bi-clock text-[8px] mr-1" />Created {createdDate}
+                </span>
+              )}
+            </div>
           </div>
-          {pod.myRole === 'admin' && (
-            <span className="font-mono text-[8px] tracking-[0.08em] uppercase text-green-dark border border-green-dark/20 bg-green-dark/5 rounded-full px-2 py-0.5 flex-shrink-0">Admin</span>
-          )}
+            <div className="flex items-center gap-2 flex-shrink-0">
+            {pod.piScore != null && (
+              <div className="flex flex-col items-end gap-0.5 min-w-[64px]">
+                <span className="font-mono text-[9px] text-[#AAA]">PI {pod.piScore}</span>
+                <div className="w-16 bg-black/[0.06] rounded-full h-1.5 overflow-hidden">
+                  <div className="h-1.5 rounded-full" style={{
+                    width: `${pod.piScore}%`,
+                    background: pod.piScore >= 90 ? '#1DC433' : pod.piScore >= 75 ? '#F59E0B' : '#3B82F6'
+                  }} />
+                </div>
+              </div>
+            )}
+            {pod.xp > 0 && (
+              <span className="flex items-center gap-1 font-mono text-[10px] font-medium text-[#F59E0B] bg-[#F59E0B]/10 border border-[#F59E0B]/20 rounded-full px-2 py-0.5">
+                <i className="bi bi-lightning-charge-fill text-[9px]" />{pod.xp} XP
+              </span>
+            )}
+            {pod.myRole === 'admin' && (
+              <span className="font-mono text-[8px] tracking-[0.08em] uppercase text-green-dark border border-green-dark/20 bg-green-dark/5 rounded-full px-2 py-0.5">Admin</span>
+            )}
+          </div>
         </div>
         <div className="flex items-center gap-3 pt-2 border-t border-black/[0.05]">
           <span className="flex items-center gap-1 text-[11px] font-light text-[#AAA]">
             <i className="bi bi-people text-[10px]" />{pod.memberCount ?? 0}
           </span>
-          {pod.reputationScore != null && (
+          {pod.piScore != null && (
             <span className="flex items-center gap-1 text-[11px] font-light text-[#AAA]">
-              <i className="bi bi-star text-[10px]" />{pod.reputationScore}
-            </span>
-          )}
-          {pod.popCount > 0 && (
-            <span className="flex items-center gap-1 text-[11px] font-light text-[#AAA]">
-              <i className="bi bi-patch-check text-[10px] text-[#3B82F6]" />{pod.popCount}
+              <i className="bi bi-graph-up-arrow text-[10px]" />{pod.piScore}
             </span>
           )}
           {pod.earningsUsd > 0 && (
@@ -213,7 +242,7 @@ function NotificationRow({ notif }) {
   const iconCls = icons[notif.type] ?? 'bi-bell text-[#AAA]'
 
   return (
-    <div className={`flex items-start gap-3 px-4 py-3.5 border-b border-black/[0.05] last:border-b-0 ${!notif.read ? 'bg-[#DFF8EB] cursor-pointer hover:bg-[#CFF2DE]' : 'hover:bg-[#FAFAFA]'} transition-colors`}>
+    <div className={`flex items-start gap-3 px-4 py-3.5 border-b border-black/[0.05] last:border-b-0 ${!notif.read ? 'bg-[#DFF8EB] notif-unread cursor-pointer hover:bg-[#CFF2DE]' : 'hover:bg-[#FAFAFA]'} transition-colors`}>
       <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${!notif.read ? 'bg-green-dark/15' : 'bg-[#F4F4F2]'}`}>
         <i className={`bi ${iconCls} text-[12px]`} />
       </div>
@@ -264,7 +293,7 @@ export default function DashboardClient() {
   const recentNotifs = notifications.slice(0, 4)
 
   return (
-    <div className="min-h-screen bg-paper" style={{ fontFamily: 'Outfit, sans-serif' }}>
+    <div className="min-h-screen bg-paper pb-24 sm:pb-8" style={{ fontFamily: 'Outfit, sans-serif' }}>
       <NavBar user={user} unreadCount={unreadCount} onLogout={handleLogout} />
 
       {/* DEMO BANNER */}
@@ -288,8 +317,10 @@ export default function DashboardClient() {
                   <h1 className="font-serif text-[22px] sm:text-[26px] font-light tracking-[-0.04em] text-ink">
                     {user?.displayName ? `Hey, ${user.displayName.split(' ')[0]}.` : 'Dashboard'}
                   </h1>
-                  {user?.blueTick && <i className="bi bi-patch-check-fill text-[#3B82F6] text-[16px]" title="Blue" />}
-                  {user?.goldTick && <i className="bi bi-patch-check-fill text-[#F59E0B] text-[16px]" title="Gold" />}
+                  {(user?.goldTick || user?.blueTick) && (
+                    <i className={`bi bi-patch-check-fill text-[16px] ${user?.goldTick ? 'text-[#F59E0B]' : 'text-[#3B82F6]'}`}
+                      title={user?.goldTick ? 'Gold' : 'Blue'} />
+                  )}
                 </div>
               )
             }
@@ -305,9 +336,9 @@ export default function DashboardClient() {
             : (
               <>
                 <StatCard label="Earnings"    icon="bi-cash-coin"            accent="#1DC433" value={`$${(user?.totalEarningsUsd ?? 0).toLocaleString()}`} href="/leaderboard"  imgSrc="/images/earnings-hero.png" />
-                <StatCard label="Reputation"  icon="bi-star-fill"            accent="#F59E0B" value={user?.reputationScore ?? '—'} href="/profile/pop" />
-                <StatCard label="PoP Badges"  icon="bi-patch-check-fill"     accent="#3B82F6" value={user?.totalPops ?? 0}         href="/profile/pop" />
-                <StatCard label="Active Pods" icon="bi-lightning-charge-fill" accent="#8B5CF6" value={activePods.length}
+                <StatCard label="PI Score"   icon="bi-graph-up-arrow"        accent="#F59E0B" value={user?.piScore ?? '—'}  href="/profile/pi" />
+                <StatCard label="XP"         icon="bi-lightning-charge-fill" accent="#3B82F6" value={user?.totalXp ?? 0}    href="/profile/xp" />
+                <StatCard label="Active Pods" icon="bi-people-fill"          accent="#8B5CF6" value={activePods.length}
                   onClick={() => setPodFilter(f => f === 'active' ? null : 'active')}
                   active={podFilter === 'active'} />
               </>
@@ -355,7 +386,7 @@ export default function DashboardClient() {
                   )}
                 </div>
               ) : (
-                <div className="space-y-4">
+                <div className="space-y-5">
                   {visiblePods.map(pod => <PodCard key={pod.id} pod={pod} />)}
                   {displayedPods.length > visiblePods.length && (
                     <div className="pt-2 text-right">
@@ -399,13 +430,12 @@ export default function DashboardClient() {
               </div>
               <div className="divide-y divide-black/[0.05]">
                 {[
-                  { href: '/marketplace',  icon: 'bi-briefcase',                         label: 'Marketplace',     sub: 'Browse open deals' },
-                  { href: '/pod/create',   icon: 'bi-people',                            label: 'Create a pod',    sub: 'Min 2, max 5 members' },
-                  { href: '/profile/pop',  icon: 'bi-patch-check-fill text-[#3B82F6]',   label: 'Performance Book',sub: 'All PoP badges' },
-                  { href: '/leaderboard',  icon: 'bi-trophy text-[#F59E0B]',             label: 'Leaderboard',     sub: 'Top earners' },
-                  { href: '/premium',      icon: 'bi-patch-check-fill text-[#F59E0B]',   label: 'Get Premium',     sub: 'Verified status' },
+                  { href: '/dashboard',    icon: 'bi-grid-fill text-[#8B5CF6]',           label: 'Dashboard',       sub: 'Your overview' },
+                  { href: '/marketplace',  icon: 'bi-briefcase text-[#1DC433]',            label: 'Marketplace',     sub: 'Browse open deals' },
+                  { href: '/marketplace',  icon: 'bi-handshake text-[#3B82F6]',            label: 'Deals',           sub: 'Your matched deals' },
+                  { href: '/leaderboard',  icon: 'bi-trophy text-[#F59E0B]',               label: 'Leaderboard',     sub: 'Top earners' },
                 ].map(({ href, icon, label, sub }) => (
-                  <Link key={href} href={href}
+                  <Link key={label} href={href}
                     className="flex items-center gap-3 px-4 py-3 hover:bg-[#FAFAFA] transition-colors">
                     <i className={`bi ${icon} text-[15px] w-4 text-center flex-shrink-0`} />
                     <div className="flex-1 min-w-0">

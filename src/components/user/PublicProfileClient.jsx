@@ -68,10 +68,13 @@ export default function PublicProfileClient({ username }) {
   return (
     <div className="min-h-screen bg-paper" style={{ fontFamily: 'Outfit, sans-serif' }}>
       <div className="sticky top-0 z-20 bg-paper/90 backdrop-blur-sm border-b border-black/[0.06]">
-        <div className="max-w-[720px] mx-auto px-5 sm:px-8 h-[58px] flex items-center justify-between">
-          <Link href="/leaderboard" className="flex items-center gap-2 font-mono text-[10px] tracking-[0.1em] uppercase text-[#BBB] hover:text-ink transition-colors">
-            <i className="bi bi-arrow-left text-[11px]" />Leaderboard
+        <div className="max-w-[720px] mx-auto px-5 sm:px-8 h-[58px] flex items-center gap-3">
+          <Link href="/dashboard" className="flex items-center gap-2 font-mono text-[10px] tracking-[0.1em] uppercase text-[#BBB] hover:text-ink transition-colors">
+            <i className="bi bi-arrow-left text-[11px]" />Dashboard
           </Link>
+          <span className="text-[#E0E0E0] text-[12px]">/</span>
+          <span className="font-mono text-[10px] tracking-[0.1em] uppercase text-[#BBB]">Public Profile</span>
+          <span className="text-[#E0E0E0] text-[12px]">/</span>
           <span className="font-mono text-[10px] tracking-[0.1em] uppercase text-[#BBB]">@{username}</span>
           <div className="ml-auto"><ThemeToggle /></div>
         </div>
@@ -92,15 +95,16 @@ export default function PublicProfileClient({ username }) {
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 flex-wrap mb-0.5">
                 <h1 className="font-serif text-[24px] font-light tracking-[-0.04em] text-ink">{profile.displayName}</h1>
-                {profile.blueTick && (
-                  <span title="Premium" className="flex items-center gap-1 font-mono text-[9px] tracking-[0.06em] uppercase text-[#3B82F6] border border-[#3B82F6]/20 bg-[#3B82F6]/05 rounded-full px-2 py-0.5">
-                    <i className="bi bi-patch-check-fill text-[10px]" />Verified
-                  </span>
-                )}
-                {profile.goldTick && (
-                  <span title="Gold Tick" className="flex items-center gap-1 font-mono text-[9px] tracking-[0.06em] uppercase text-[#F59E0B] border border-[#F59E0B]/20 bg-[#F59E0B]/05 rounded-full px-2 py-0.5">
-                    <i className="bi bi-patch-check-fill text-[10px]" />Gold
-                  </span>
+                {(profile.goldTick || profile.blueTick) && (
+                  profile.goldTick ? (
+                    <span title="Gold Tick" className="flex items-center gap-1 font-mono text-[9px] tracking-[0.06em] uppercase text-[#F59E0B] border border-[#F59E0B]/20 bg-[#F59E0B]/05 rounded-full px-2 py-0.5">
+                      <i className="bi bi-patch-check-fill text-[10px]" />Gold
+                    </span>
+                  ) : (
+                    <span title="Premium" className="flex items-center gap-1 font-mono text-[9px] tracking-[0.06em] uppercase text-[#3B82F6] border border-[#3B82F6]/20 bg-[#3B82F6]/05 rounded-full px-2 py-0.5">
+                      <i className="bi bi-patch-check-fill text-[10px]" />Verified
+                    </span>
+                  )
                 )}
               </div>
               <p className="font-mono text-[10.5px] text-[#AAA]">@{profile.username}</p>
@@ -117,12 +121,12 @@ export default function PublicProfileClient({ username }) {
               <p className="font-mono text-[9px] tracking-[0.1em] uppercase text-[#AAA]">Total earned</p>
             </div>
             <div className="text-center">
-              <p className="font-serif text-[22px] font-light text-ink tracking-[-0.05em] leading-none mb-0.5">{profile.reputationScore ?? '—'}</p>
-              <p className="font-mono text-[9px] tracking-[0.1em] uppercase text-[#AAA]">Reputation</p>
+              <p className="font-serif text-[22px] font-light text-ink tracking-[-0.05em] leading-none mb-0.5">{profile.piScore ?? '—'}</p>
+              <p className="font-mono text-[9px] tracking-[0.1em] uppercase text-[#AAA]">PI Score</p>
             </div>
             <div className="text-center">
-              <p className="font-serif text-[22px] font-light text-[#3B82F6] tracking-[-0.05em] leading-none mb-0.5">{profile.totalPops ?? 0}</p>
-              <p className="font-mono text-[9px] tracking-[0.1em] uppercase text-[#AAA]">PoP badges</p>
+              <p className="font-serif text-[22px] font-light text-[#3B82F6] tracking-[-0.05em] leading-none mb-0.5">{profile.totalXp ?? 0}</p>
+              <p className="font-mono text-[9px] tracking-[0.1em] uppercase text-[#AAA]">XP</p>
             </div>
           </div>
 
@@ -130,7 +134,7 @@ export default function PublicProfileClient({ username }) {
           {profile.roleTags?.length > 0 && (
             <div className="flex flex-wrap gap-1.5 mb-3">
               {profile.roleTags.map(r => (
-                <span key={r} className="font-mono text-[10px] text-ink border border-black/[0.12] bg-[#F4F4F2] rounded-full px-2.5 py-[3px]">{r}</span>
+                <span key={r} className="font-mono text-[10px] text-ink border border-black/[0.12] bg-[#F4F4F2] rounded-full px-2.5 py-[3px] role-tag-pill">{r}</span>
               ))}
             </div>
           )}
@@ -139,7 +143,7 @@ export default function PublicProfileClient({ username }) {
           {profile.skillTags?.length > 0 && (
             <div className="flex flex-wrap gap-1.5 mb-4">
               {profile.skillTags.map(s => (
-                <span key={s} className="font-mono text-[10px] text-[#999] border border-black/[0.09] rounded-full px-2.5 py-[3px]">{s}</span>
+                <span key={s} className="font-mono text-[10px] text-[#999] border border-black/[0.09] rounded-full px-2.5 py-[3px] skill-tag-pill">{s}</span>
               ))}
             </div>
           )}
@@ -179,7 +183,7 @@ export default function PublicProfileClient({ username }) {
           )}
         </div>
 
-        {/* PoP badges */}
+        {/* XP */}
         {profile.popRecords?.length > 0 && (
           <div className="bg-white border border-black/[0.07] rounded-[14px] overflow-hidden" style={{ animation: 'up 0.5s 0.08s both' }}>
             <div className="px-6 py-4 border-b border-black/[0.06]">

@@ -23,7 +23,7 @@ export const wagmiConfig = getConfig()
 // Message users sign to prove wallet ownership. No transaction sent.
 export function buildSignInMessage(address) {
   return [
-    'Work3 Labs — Contributor Portal',
+    'Work3 Labs — Talent Portal',
     '',
     'Sign this message to verify wallet ownership.',
     'No transaction will be sent.',

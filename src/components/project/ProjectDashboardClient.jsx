@@ -62,7 +62,9 @@ export default function ProjectDashboardClient() {
   const [profile, setProfile]   = useState(null)
   const [loading, setLoading]   = useState(true)
   const [filter, setFilter]     = useState('all')
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [menuOpen, setMenuOpen]       = useState(false)
+  const [creditsOpen, setCreditsOpen] = useState(false)
+  const [comingSoon, setComingSoon]   = useState(false)
 
   useEffect(() => {
     Promise.all([fetchProjectDashboard(), fetchProjectJobs(), fetchProfile()])
@@ -96,7 +98,7 @@ export default function ProjectDashboardClient() {
   const avatarUrl   = profile?.avatarUrl ?? null
 
   return (
-    <div className="min-h-screen bg-paper" style={{ fontFamily: 'Outfit, sans-serif' }}>
+    <div className="min-h-screen bg-paper pb-24 sm:pb-8" style={{ fontFamily: 'Outfit, sans-serif' }}>
 
       {/* ── NAV ─────────────────────────────────────── */}
       <nav className="sticky top-0 z-30 bg-paper/90 backdrop-blur-sm border-b border-black/[0.06]">
@@ -141,13 +143,17 @@ export default function ProjectDashboardClient() {
                     className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
                     <i className="bi bi-plus-circle text-[14px] text-[#AAA]" />Post a deal
                   </Link>
+                  <Link href="/credits" onClick={() => setMenuOpen(false)}
+                    className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
+                    <i className="bi bi-coin text-[14px] text-[#AAA]" />Credits
+                  </Link>
                   <Link href="/project/kyc" onClick={() => setMenuOpen(false)}
                     className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
                     <i className="bi bi-shield-check text-[14px] text-[#AAA]" />KYC Verification
                   </Link>
                   <Link href="/project/premium" onClick={() => setMenuOpen(false)}
                     className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
-                    <i className="bi bi-patch-check-fill text-[14px] text-[#F59E0B]" />Get Premium
+                    <i className="bi bi-patch-check-fill text-[14px] text-[#AAA]" />Get Premium
                   </Link>
                   <Link href="/auth/login" onClick={() => { setMenuOpen(false); document.cookie = 'w3l_user_auth=;path=/;Max-Age=0' }}
                     className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FFF5F5] transition-colors text-[13px] font-light text-red-400">
@@ -164,7 +170,7 @@ export default function ProjectDashboardClient() {
       <div className="bg-green-dark text-ink px-4 py-2 flex items-center justify-center gap-3 flex-wrap">
         <i className="bi bi-lightning-charge-fill text-[12px]" />
         <span className="font-sans text-[12px] font-medium">Demo mode — all data is local and editable. No backend required.</span>
-        <a href="/dashboard" className="font-mono text-[10px] underline opacity-70">View as contributor →</a>
+        <a href="/dashboard" className="font-mono text-[10px] underline opacity-70">View as talent →</a>
       </div>
       <main className="max-w-[1100px] mx-auto px-4 sm:px-8 py-8 sm:py-10">
 
@@ -188,8 +194,10 @@ export default function ProjectDashboardClient() {
                   <p className="font-mono text-[9.5px] tracking-[0.16em] uppercase text-[#CCC] mb-2">Project dashboard</p>
                   <h1 className="font-serif text-[26px] sm:text-[32px] font-light tracking-[-0.04em] text-ink mb-1">
                     {displayName}
-                    {profile?.blueTick  && <i className="bi bi-patch-check-fill text-[#F59E0B] text-[18px] ml-2 align-middle" title="Premium" />}
-                    {profile?.goldTick  && <i className="bi bi-patch-check-fill text-[#F59E0B] text-[18px] ml-1 align-middle" title="Gold" />}
+                    {(profile?.goldTick || profile?.blueTick) && (
+                      <i className={`bi bi-patch-check-fill text-[18px] ml-2 align-middle ${profile?.goldTick ? 'text-[#F59E0B]' : 'text-[#3B82F6]'}`}
+                        title={profile?.goldTick ? 'Gold' : 'Premium'} />
+                    )}
                   </h1>
                   <p className="text-[13.5px] font-light text-[#AAA]">
                     {stats.active > 0
@@ -226,8 +234,11 @@ export default function ProjectDashboardClient() {
           }
         </div>
 
-        {/* ── DEALS TABLE ─────────────────────────── */}
-        <div style={{ animation: 'up 0.5s 0.08s both' }}>
+        {/* ── MAIN GRID: deals + quick actions ─────── */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+
+        {/* Left: Deals Table */}
+        <div className="lg:col-span-2" style={{ animation: 'up 0.5s 0.08s both' }}>
           {/* Header: filters only — no extra post button here */}
           <div className="flex items-center gap-2 mb-4 flex-wrap">
             <div className="flex gap-1 flex-wrap flex-1">
@@ -240,7 +251,7 @@ export default function ProjectDashboardClient() {
                 <button key={f.key} type="button" onClick={() => setFilter(f.key)}
                   className={`flex items-center gap-1.5 font-mono text-[10px] tracking-[0.06em] uppercase border rounded-full px-3 py-1.5 cursor-pointer transition-all bg-transparent whitespace-nowrap ${
                     filter === f.key
-                      ? 'bg-ink text-paper border-transparent'
+                        ? 'bg-[#111113] text-paper border-transparent'
                       : 'text-[#AAA] border-black/[0.12] hover:border-black/25'
                   }`}>
                   {f.dot && <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: filter === f.key ? 'white' : f.dot }} />}
@@ -284,6 +295,35 @@ export default function ProjectDashboardClient() {
             )}
           </div>
         </div>
+
+        {/* Right: Quick Actions */}
+        <div style={{ animation: 'up 0.5s 0.1s both' }}>
+          <div className="bg-white border border-black/[0.07] rounded-[14px] overflow-hidden">
+            <div className="px-4 py-3 border-b border-black/[0.06]">
+              <h3 className="font-sans text-[13px] font-medium text-ink tracking-[-0.01em]">Quick actions</h3>
+            </div>
+            <div className="divide-y divide-black/[0.05]">
+              {[
+                { href: '/project',          icon: 'bi-grid-fill text-[#8B5CF6]',        label: 'Dashboard',   sub: 'Project overview' },
+                { href: '/marketplace',      icon: 'bi-briefcase text-[#1DC433]',         label: 'Marketplace', sub: 'Find talent' },
+                { href: '/project/create-deal', icon: 'bi-handshake text-[#3B82F6]',     label: 'Deals',       sub: 'Post & manage deals' },
+                { href: '/leaderboard',      icon: 'bi-trophy text-[#F59E0B]',            label: 'Leaderboard', sub: 'Top talent' },
+              ].map(({ href, icon, label, sub }) => (
+                <Link key={label} href={href}
+                  className="flex items-center gap-3 px-4 py-3 hover:bg-[#FAFAFA] transition-colors">
+                  <i className={`bi ${icon} text-[15px] w-4 text-center flex-shrink-0`} />
+                  <div className="flex-1 min-w-0">
+                    <p className="font-sans text-[12.5px] font-medium text-ink tracking-[-0.01em]">{label}</p>
+                    <p className="text-[10.5px] font-light text-[#AAA]">{sub}</p>
+                  </div>
+                  <i className="bi bi-arrow-right text-[10px] text-[#CCC] flex-shrink-0" />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        </div>{/* end main grid */}
 
         {/* ── MOBILE: floating post button ────────── */}
         <Link href="/project/create-deal"
