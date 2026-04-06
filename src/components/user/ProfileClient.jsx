@@ -97,14 +97,14 @@ function TagInput({ label, tags, onChange, suggestions, maxTags = 10, placeholde
       </div>
       {hint && <p className="text-[11.5px] text-[#BBB] font-light mb-2 leading-snug">{hint}</p>}
       <div
-        className="min-h-[46px] flex flex-wrap gap-1.5 items-center border border-black/[0.09] rounded-[10px] px-3 py-2 focus-within:border-[#1DC433] focus-within:shadow-[0_0_0_3px_rgba(45,252,68,0.08)] transition-all cursor-text"
+        className="tag-input-container min-h-[46px] flex flex-wrap gap-1.5 items-center border border-black/[0.09] rounded-[10px] px-3 py-2 focus-within:border-[#1DC433] focus-within:shadow-[0_0_0_3px_rgba(45,252,68,0.08)] transition-all cursor-text bg-white"
         onClick={() => ref.current?.focus()}
       >
         {tags.map(t => (
           <span key={t} className="flex items-center gap-1 font-mono text-[10.5px] text-ink border border-black/[0.12] bg-[#F4F4F2] rounded-full px-2.5 py-[3px] flex-shrink-0 tag-pill">
             {t}
             <button type="button" onClick={e => { e.stopPropagation(); remove(t) }}
-              className="ml-0.5 text-[#AAA] hover:text-red-400 transition-colors bg-transparent border-none cursor-pointer p-0 leading-none">
+              className="ml-0.5 text-[#AAA] hover:text-red-400 transition-colors bg-transparent border-none cursor-pointer p-0 leading-none tag-pill-x">
               <i className="bi bi-x text-[11px]" />
             </button>
           </span>
@@ -434,7 +434,7 @@ export default function ProfileClient() {
                 </div>
               ) : (
                 <button type="button" onClick={() => openModal()}
-                  className="w-full flex items-center justify-center gap-2.5 border border-black/[0.09] rounded-[10px] px-4 py-3 font-sans text-[13.5px] font-light text-[#555] hover:border-black/20 hover:text-ink hover:bg-black/[0.02] transition-all bg-transparent cursor-pointer">
+                  className="w-full flex items-center justify-center gap-2.5 border border-black/[0.09] rounded-[10px] px-4 py-3 font-sans text-[13.5px] font-light text-[#555] hover:border-black/20 hover:text-ink hover:bg-black/[0.02] transition-all bg-transparent cursor-pointer connect-wallet-btn">
                   <i className="bi bi-wallet2 text-[15px]" />Connect Base wallet
                 </button>
               )}

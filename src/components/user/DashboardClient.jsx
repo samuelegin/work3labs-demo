@@ -35,7 +35,7 @@ function NavBar({ user, unreadCount, onLogout }) {
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
-    <nav className="sticky top-0 z-30 bg-paper/90 backdrop-blur-sm border-b border-black/[0.06]">
+    <nav className="sticky top-0 z-[9999] bg-paper/90 backdrop-blur-sm border-b border-black/[0.06]">
       <div className="max-w-[1100px] mx-auto px-4 sm:px-8 h-[58px] flex items-center justify-between gap-3">
 
         {/* Logo */}
@@ -77,7 +77,7 @@ function NavBar({ user, unreadCount, onLogout }) {
             </button>
 
             {menuOpen && (
-              <div className="absolute right-0 top-full mt-1.5 w-[210px] bg-white border border-black/[0.07] rounded-[12px] shadow-[0_4px_24px_rgba(0,0,0,0.08)] overflow-hidden z-50"
+              <div className="absolute right-0 top-full mt-1.5 w-[210px] bg-white border border-black/[0.07] rounded-[12px] shadow-[0_4px_24px_rgba(0,0,0,0.08)] overflow-hidden z-[9999]"
                 style={{ animation: 'up 0.15s both' }}>
                 {user?.username && (
                   <Link href={`/u/${user.username}`} onClick={() => setMenuOpen(false)}
@@ -96,10 +96,6 @@ function NavBar({ user, unreadCount, onLogout }) {
                 <Link href="/profile/pi" onClick={() => setMenuOpen(false)}
                   className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
                   <i className="bi bi-patch-check text-[14px] text-[#AAA]" />PoP & PI Score
-                </Link>
-                <Link href="/profile/xp" onClick={() => setMenuOpen(false)}
-                  className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
-                  <i className="bi bi-lightning-charge-fill text-[14px] text-[#AAA]" />XP
                 </Link>
                 <Link href="/marketplace" onClick={() => setMenuOpen(false)}
                   className="flex items-center gap-2.5 px-4 py-3 hover:bg-[#FAFAFA] transition-colors text-[13px] font-light text-ink border-b border-black/[0.05]">
@@ -263,7 +259,6 @@ export default function DashboardClient() {
   const [pods,          setPods]          = useState([])
   const [notifications, setNotifications] = useState([])
   const [loading,       setLoading]       = useState(true)
-  const [podFilter,     setPodFilter]     = useState(null)
 
   useEffect(() => {
     Promise.all([
@@ -286,10 +281,7 @@ export default function DashboardClient() {
   }
 
   const unreadCount  = notifications.filter(n => !n.read).length
-  const activePods   = pods.filter(p => ['active','submitted','reviewing','approved','claimable'].includes(p.status))
-  const completedPods= pods.filter(p => p.status === 'completed')
-  const displayedPods= podFilter === 'active' ? activePods : podFilter === 'completed' ? completedPods : pods
-  const visiblePods  = displayedPods.slice(0, 3)
+  const visiblePods  = pods.slice(0, 3)
   const recentNotifs = notifications.slice(0, 4)
 
   return (
@@ -338,9 +330,7 @@ export default function DashboardClient() {
                 <StatCard label="Earnings"    icon="bi-cash-coin"            accent="#1DC433" value={`$${(user?.totalEarningsUsd ?? 0).toLocaleString()}`} href="/leaderboard"  imgSrc="/images/earnings-hero.png" />
                 <StatCard label="PI Score"   icon="bi-graph-up-arrow"        accent="#F59E0B" value={user?.piScore ?? '—'}  href="/profile/pi" />
                 <StatCard label="XP"         icon="bi-lightning-charge-fill" accent="#3B82F6" value={user?.totalXp ?? 0}    href="/profile/xp" />
-                <StatCard label="Active Pods" icon="bi-people-fill"          accent="#8B5CF6" value={activePods.length}
-                  onClick={() => setPodFilter(f => f === 'active' ? null : 'active')}
-                  active={podFilter === 'active'} />
+                <StatCard label="Stamp Balance" icon="bi-stamp-fill"         accent="#8B5CF6" value={user?.stampBalance ?? 0} href="/stamps" />
               </>
             )
           }
@@ -357,12 +347,6 @@ export default function DashboardClient() {
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
                   <h2 className="font-serif text-[17px] font-light text-ink tracking-[-0.03em]">Your pods</h2>
-                  {podFilter && (
-                    <button onClick={() => setPodFilter(null)}
-                      className="font-mono text-[9px] tracking-[0.06em] uppercase text-[#CCC] hover:text-red-400 transition-colors bg-transparent border-none cursor-pointer p-0">
-                      <i className="bi bi-x text-[11px]" /> clear
-                    </button>
-                  )}
                 </div>
                 <Link href="/pod/create"
                   className="flex items-center gap-1 font-mono text-[9.5px] tracking-[0.08em] uppercase text-ink border border-black/[0.12] rounded-full px-3 py-1.5 hover:bg-black/[0.04] transition-colors">
@@ -372,26 +356,22 @@ export default function DashboardClient() {
 
               {loading ? (
                 <div className="space-y-2">{[1,2].map(i => <Skeleton key={i} className="h-[80px]" />)}</div>
-              ) : displayedPods.length === 0 ? (
+              ) : pods.length === 0 ? (
                 <div className="bg-white border border-black/[0.07] rounded-[14px] px-6 py-8 flex flex-col items-center text-center">
                   <img src="/images/success-hero.png" alt="" className="w-20 h-14 object-contain mb-2 opacity-70 mix-blend-multiply" />
-                  <p className="font-serif text-[16px] font-light text-ink tracking-[-0.03em] mb-1">
-                    {podFilter ? `No ${podFilter} pods` : 'No pods yet'}
-                  </p>
-                  {!podFilter && (
-                    <Link href="/pod/create"
-                      className="mt-3 inline-flex items-center gap-1.5 bg-ink text-paper font-sans text-[12.5px] font-medium px-4 py-2 rounded-[8px] hover:bg-[#1A1A1A] transition-colors">
-                      <i className="bi bi-plus text-[13px]" />Create your first pod
-                    </Link>
-                  )}
+                  <p className="font-serif text-[16px] font-light text-ink tracking-[-0.03em] mb-1">No pods yet</p>
+                  <Link href="/pod/create"
+                    className="mt-3 inline-flex items-center gap-1.5 bg-ink text-paper font-sans text-[12.5px] font-medium px-4 py-2 rounded-[8px] hover:bg-[#1A1A1A] transition-colors">
+                    <i className="bi bi-plus text-[13px]" />Create your first pod
+                  </Link>
                 </div>
               ) : (
                 <div className="space-y-5">
                   {visiblePods.map(pod => <PodCard key={pod.id} pod={pod} />)}
-                  {displayedPods.length > visiblePods.length && (
+                  {pods.length > visiblePods.length && (
                     <div className="pt-2 text-right">
                       <Link href="/pod" className="font-mono text-[10px] text-ink hover:text-green-dark transition-colors">
-                        View all pods ({displayedPods.length}) →
+                        View all pods ({pods.length}) →
                       </Link>
                     </div>
                   )}
@@ -409,7 +389,9 @@ export default function DashboardClient() {
                 </Link>
               </div>
               <div className="bg-white border border-black/[0.07] rounded-[14px] px-5 py-7 flex flex-col items-center text-center">
-                <img src="/images/deals-icon.png" alt="" className="w-12 h-12 object-contain mb-2 opacity-60 mix-blend-multiply" />
+                <div className="w-10 h-10 rounded-[10px] flex items-center justify-center mb-3" style={{ backgroundColor: 'rgba(59,130,246,0.12)' }}>
+                  <i className="bi bi-handshake text-[18px]" style={{ color: '#3B82F6' }} />
+                </div>
                 <p className="text-[12.5px] font-light text-[#AAA] mb-3">No active deals. Deals you're matched to will appear here.</p>
                 <Link href="/marketplace"
                   className="inline-flex items-center gap-1.5 border border-black/[0.09] text-[#555] font-sans text-[12.5px] font-light px-4 py-2 rounded-[8px] hover:border-black/20 hover:text-ink transition-all">

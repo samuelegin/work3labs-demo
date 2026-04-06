@@ -29,11 +29,10 @@ html.dark body {
 /* Dark mode overrides for Tailwind color classes */
 html.dark .bg-paper   { background-color: #111113 !important; }
 html.dark .bg-white   { background-color: #1A1A1E !important; }
-html.dark .bg-\[#FAFAF8\] { background-color: #111113 !important; }
+html.dark .bg-\[#FAFAF8\] { background-color: #141416 !important; }
 html.dark .bg-\[#FAFAFA\] { background-color: #222226 !important; }
 html.dark .bg-\[#F4F4F2\] { background-color: #222226 !important; }
 html.dark .bg-\[#F7F7F5\] { background-color: #141416 !important; }
-html.dark .bg-\[#FAFAF8\]  { background-color: #141416 !important; }
 html.dark .text-ink   { color: #F0F0F2 !important; }
 html.dark .text-\[\#555\] { color: #AAAAAA !important; }
 html.dark .text-\[\#666\] { color: #999999 !important; }
@@ -346,7 +345,32 @@ html.dark .notif-unread span:not(.bg-green-dark) {
   color: #F0F0F2 !important;
 }
 
-/* ─── CHAT WIDGET dark mode ──────────────────────────────────── */
+/* ─── CONNECT WALLET BUTTON dark mode ───────────────────── */
+html.dark .connect-wallet-btn {
+  background-color: #1A1A1E !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  color: #888896 !important;
+}
+html.dark .connect-wallet-btn:hover {
+  background-color: #222226 !important;
+  border-color: rgba(255,255,255,0.15) !important;
+  color: #F0F0F2 !important;
+}
+
+/* ─── TAG PILL X button dark mode ───────────────────────── */
+html.dark .tag-pill-x {
+  color: #555560 !important;
+}
+html.dark .tag-pill-x:hover {
+  color: #FF6B6B !important;
+}
+
+/* ─── TAG INPUT container dark mode ─────────────────────── */
+html.dark .tag-input-container {
+  background-color: #141416 !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+
 html.dark .chat-panel,
 html.dark [style*="min(380px"] {
   background-color: #1A1A1E !important;
@@ -372,3 +396,5 @@ html.dark nav.fixed.bottom-0 {
   background-color: #111113 !important;
   border-color: rgba(255,255,255,0.06) !important;
 }
+
+

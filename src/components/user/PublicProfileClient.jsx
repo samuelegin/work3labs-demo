@@ -53,8 +53,8 @@ export default function PublicProfileClient({ username }) {
         <div className="text-center">
           <p className="font-serif text-[22px] font-light text-ink mb-2">Profile not found</p>
           <p className="text-[13.5px] font-light text-[#AAA] mb-6">@{username} doesn't exist.</p>
-          <Link href="/leaderboard" className="font-mono text-[10px] tracking-[0.08em] uppercase text-[#AAA] hover:text-ink transition-colors">
-            View leaderboard
+          <Link href="/dashboard" className="font-mono text-[10px] tracking-[0.08em] uppercase text-[#AAA] hover:text-ink transition-colors">
+            ← Back to dashboard
           </Link>
         </div>
       </div>
@@ -69,14 +69,12 @@ export default function PublicProfileClient({ username }) {
     <div className="min-h-screen bg-paper" style={{ fontFamily: 'Outfit, sans-serif' }}>
       <div className="sticky top-0 z-20 bg-paper/90 backdrop-blur-sm border-b border-black/[0.06]">
         <div className="max-w-[720px] mx-auto px-5 sm:px-8 h-[58px] flex items-center gap-3">
-          <Link href="/dashboard" className="flex items-center gap-2 font-mono text-[10px] tracking-[0.1em] uppercase text-[#BBB] hover:text-ink transition-colors">
+          <Link href="/dashboard" className="flex items-center gap-1.5 font-mono text-[10px] tracking-[0.1em] uppercase text-[#BBB] hover:text-ink transition-colors flex-shrink-0">
             <i className="bi bi-arrow-left text-[11px]" />Dashboard
           </Link>
           <span className="text-[#E0E0E0] text-[12px]">/</span>
-          <span className="font-mono text-[10px] tracking-[0.1em] uppercase text-[#BBB]">Public Profile</span>
-          <span className="text-[#E0E0E0] text-[12px]">/</span>
-          <span className="font-mono text-[10px] tracking-[0.1em] uppercase text-[#BBB]">@{username}</span>
-          <div className="ml-auto"><ThemeToggle /></div>
+          <span className="font-mono text-[10px] tracking-[0.1em] uppercase text-[#BBB] truncate">@{username}</span>
+          <div className="ml-auto flex-shrink-0"><ThemeToggle /></div>
         </div>
       </div>
 
@@ -113,13 +111,7 @@ export default function PublicProfileClient({ username }) {
           </div>
 
           {/* Stats row */}
-          <div className="grid grid-cols-3 gap-3 mb-5 pb-5 border-b border-black/[0.06]">
-            <div className="text-center">
-              <p className="font-serif text-[22px] font-light text-green-dark tracking-[-0.05em] leading-none mb-0.5">
-                ${(profile.totalEarningsUsd ?? 0).toLocaleString()}
-              </p>
-              <p className="font-mono text-[9px] tracking-[0.1em] uppercase text-[#AAA]">Total earned</p>
-            </div>
+          <div className="grid grid-cols-2 gap-3 mb-5 pb-5 border-b border-black/[0.06]">
             <div className="text-center">
               <p className="font-serif text-[22px] font-light text-ink tracking-[-0.05em] leading-none mb-0.5">{profile.piScore ?? '—'}</p>
               <p className="font-mono text-[9px] tracking-[0.1em] uppercase text-[#AAA]">PI Score</p>
@@ -143,7 +135,7 @@ export default function PublicProfileClient({ username }) {
           {profile.skillTags?.length > 0 && (
             <div className="flex flex-wrap gap-1.5 mb-4">
               {profile.skillTags.map(s => (
-                <span key={s} className="font-mono text-[10px] text-[#999] border border-black/[0.09] rounded-full px-2.5 py-[3px] skill-tag-pill">{s}</span>
+                <span key={s} className="font-mono text-[10px] text-[#999] border border-black/[0.09] bg-transparent rounded-full px-2.5 py-[3px] skill-tag-pill">{s}</span>
               ))}
             </div>
           )}
